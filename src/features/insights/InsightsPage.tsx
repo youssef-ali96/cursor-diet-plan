@@ -1,0 +1,156 @@
+import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { Card } from '@/components/ui/Card';
+import { useInsights } from '@/hooks/useInsights';
+import { useTrackingStore } from '@/store/trackingStore';
+import { useUserStore } from '@/store/userStore';
+import { calculateBMI, getBMICategory, formatWeight } from '@/lib/utils';
+import { insightColors } from '@/components/ui/Badge';
+import type { InsightType } from '@/types';
+import { subWeeks, format, startOfWeek } from 'date-fns';
+
+export function InsightsPage() {
+  const insights = useInsights();
+  const { workouts, weights, streak } = useTrackingStore();
+  const { profile } = useUserStore();
+
+  const bmi = profile ? calculateBMI(profile.currentWeightKg, profile.heightCm) : null;
+  const bmiCat = bmi ? getBMICategory(bmi) : null;
+
+  // Weight trend calc
+  const recentWeights = weights.slice(0, 14);
+  const weightTrend = recentWeights.length >= 2
+    ? recentWeights[0].weightKg - recentWeights[recentWeights.length - 1].weightKg
+    : 0;
+
+  // Workout frequency this vs last week
+  const thisWeekStart = format(startOfWeek(new Date(), { weekStartsOn: 1 }), 'yyyy-MM-dd');
+  const lastWeekStart = format(startOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 1 }), 'yyyy-MM-dd');
+  const lastWeekEnd = format(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), 'yyyy-MM-dd');
+  const thisWeekCount = workouts.filter((w) => w.completed && w.date >= thisWeekStart).length;
+  const lastWeekCount = workouts.filter((w) => w.completed && w.date >= lastWeekStart && w.date <= lastWeekEnd).length;
+
+  return (
+    <AppLayout>
+      <PageHeader title="Smart Insights" subtitle="AI-powered analysis of your fitness data" />
+
+      <div className="p-6 space-y-6">
+        {/* Body stats card */}
+        {profile && (
+          <Card className="p-5">
+            <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Body Overview</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {[
+                { label: 'Current Weight', value: formatWeight(profile.currentWeightKg), color: '#FF9F0A' },
+                { label: 'Goal Weight', value: formatWeight(profile.goalWeightKg), color: '#30D158' },
+                { label: 'To Go', value: formatWeight(Math.abs(profile.currentWeightKg - profile.goalWeightKg)), color: '#0A84FF' },
+                { label: 'BMI', value: bmi ? `${bmi} (${bmiCat?.label})` : '--', color: bmiCat?.color ?? '#C8FF00' },
+              ].map(({ label, value, color }) => (
+                <div key={label} className="text-center p-3 bg-[#1E1E23] rounded-xl">
+                  <p className="text-[10px] font-semibold text-[#7A7A8C] uppercase tracking-wider mb-1">{label}</p>
+                  <p className="text-sm font-bold" style={{ color }}>{value}</p>
+                </div>
+              ))}
+            </div>
+          </Card>
+        )}
+
+        {/* Trend summary */}
+        <div className="grid sm:grid-cols-3 gap-4">
+          <Card className="p-4 text-center">
+            <p className="text-[10px] font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">14-Day Weight Trend</p>
+            <p className="text-3xl font-black" style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              color: weightTrend > 0 ? '#30D158' : weightTrend < 0 ? '#FF4560' : '#7A7A8C'
+            }}>
+              {weightTrend > 0 ? '-' : '+'}{Math.abs(weightTrend).toFixed(1)} kg
+            </p>
+            <p className="text-xs text-[#7A7A8C] mt-1">
+              {weightTrend > 0 ? '✅ Losing weight' : weightTrend < 0 ? '📈 Gaining weight' : 'Stable'}
+            </p>
+          </Card>
+
+          <Card className="p-4 text-center">
+            <p className="text-[10px] font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">Weekly Workouts</p>
+            <p className="text-3xl font-black text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+              {thisWeekCount}
+            </p>
+            <p className="text-xs text-[#7A7A8C] mt-1">
+              {thisWeekCount > lastWeekCount ? `+${thisWeekCount - lastWeekCount} vs last week` : thisWeekCount === lastWeekCount ? 'Same as last week' : `${lastWeekCount - thisWeekCount} less than last week`}
+            </p>
+          </Card>
+
+          <Card className="p-4 text-center">
+            <p className="text-[10px] font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">Current Streak</p>
+            <p className="text-3xl font-black text-[#FF9F0A]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+              {streak.currentStreak} 🔥
+            </p>
+            <p className="text-xs text-[#7A7A8C] mt-1">Best: {streak.longestStreak} days</p>
+          </Card>
+        </div>
+
+        {/* Insights list */}
+        <div>
+          <h2 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-3">
+            Generated Insights ({insights.length})
+          </h2>
+          <div className="space-y-3">
+            {insights.map((insight, i) => {
+              const color = insightColors[insight.type as InsightType];
+              return (
+                <div
+                  key={i}
+                  className="flex gap-4 p-4 rounded-2xl border transition-all"
+                  style={{ backgroundColor: `${color}06`, borderColor: `${color}20` }}
+                >
+                  <span className="text-2xl shrink-0">{insight.icon}</span>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-bold" style={{ color }}>{insight.title}</p>
+                      <span
+                        className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+                        style={{ backgroundColor: `${color}20`, color }}
+                      >
+                        {insight.type}
+                      </span>
+                    </div>
+                    <p className="text-sm text-[#7A7A8C] mt-1 leading-relaxed">{insight.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+
+            {insights.length === 0 && (
+              <Card className="p-8 text-center">
+                <p className="text-3xl mb-3">📊</p>
+                <p className="text-sm text-[#7A7A8C]">
+                  Log data for a few days to unlock personalized insights
+                </p>
+              </Card>
+            )}
+          </div>
+        </div>
+
+        {/* Recommendations */}
+        <Card className="p-5">
+          <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Recommendations</h3>
+          <div className="space-y-3">
+            {[
+              { icon: '🥗', title: 'Track Every Meal', desc: 'Consistent meal logging is the #1 predictor of successful weight management.', color: '#30D158' },
+              { icon: '💧', title: 'Hydration First', desc: 'Start your day with 500ml of water. Dehydration can be mistaken for hunger.', color: '#0A84FF' },
+              { icon: '😴', title: 'Prioritize Sleep', desc: 'Aim for 7–9 hours. Poor sleep increases cortisol and slows metabolism.', color: '#BF5AF2' },
+              { icon: '📈', title: 'Progressive Overload', desc: 'Increase weights by 2.5–5% every 1–2 weeks to keep making progress.', color: '#C8FF00' },
+            ].map(({ icon, title, desc, color }) => (
+              <div key={title} className="flex gap-3 p-3 rounded-xl bg-[#1E1E23]">
+                <span className="text-xl shrink-0">{icon}</span>
+                <div>
+                  <p className="text-sm font-semibold" style={{ color }}>{title}</p>
+                  <p className="text-xs text-[#7A7A8C] mt-0.5">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+    </AppLayout>
+  );
+}

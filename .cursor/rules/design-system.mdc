@@ -1,0 +1,57 @@
+---
+description: FitForge design system — colors, typography, spacing, components
+globs: **/*.tsx
+alwaysApply: false
+---
+
+# FitForge Design System
+
+## Colors (use hex directly or CSS var)
+- Brand accent: `#C8FF00` (neon lime)
+- Page bg: `#0F0F11`
+- Card bg: `#17171A`
+- Input/hover bg: `#1E1E23`
+- Border: `#2A2A30`
+- Text: `#F0F0F5` / Muted: `#7A7A8C` / Subtle: `#4A4A5A`
+- Danger: `#FF4560` | Warning: `#FF9F0A` | Info: `#0A84FF` | Success: `#30D158`
+
+## Typography
+- Headings / stats / big numbers: `font-family: 'Barlow Condensed'`, `font-black`, uppercase
+- Body: `DM Sans` (default)
+- Never use Inter, Roboto, Arial, system-ui
+
+## Stat number pattern
+```tsx
+<span className="text-4xl font-black text-[#C8FF00]"
+  style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+  {value}
+</span>
+```
+
+## Cards
+```tsx
+<Card className="p-5">           // standard card
+<Card hover>                     // adds hover lift + border glow
+<Card glow>                      // permanent brand glow shadow
+```
+
+## Buttons
+```tsx
+<Button variant="primary">      // #C8FF00 fill — main CTA
+<Button variant="secondary">    // dark border — secondary actions
+<Button variant="ghost">        // no bg — nav/icon buttons
+<Button variant="danger">       // red tint — destructive
+<Button variant="outline">      // lime border — alternative CTA
+```
+
+## Progress
+```tsx
+<ProgressBar value={0-100} color="#C8FF00" height={6} />
+<CircularProgress value={0-100} size={80} strokeWidth={6} color="#C8FF00" />
+```
+
+## Spacing
+- Page padding: `p-6`
+- Section gaps: `space-y-6`
+- Card border radius: `rounded-2xl` or `rounded-[16px]`
+- Button radius: `rounded-xl` or `rounded-[10px]`

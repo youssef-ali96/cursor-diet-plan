@@ -1,0 +1,75 @@
+---
+description: Step-by-step guide for adding new pages, plans, or store actions to FitForge
+alwaysApply: false
+---
+
+# Adding Features to FitForge
+
+## New Page / Route
+
+1. Create `src/features/mypage/MyPage.tsx`
+2. Use `<AppLayout>` + `<PageHeader>`:
+```tsx
+import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+
+export function MyPage() {
+  return (
+    <AppLayout>
+      <PageHeader title="MY PAGE" subtitle="Brief description" />
+      <div className="p-6 space-y-6">
+        {/* content */}
+      </div>
+    </AppLayout>
+  );
+}
+```
+3. Add import + route in `src/App.tsx`
+4. Add to `navItems` in `src/components/layout/Sidebar.tsx`
+5. Add to `mobileNav` in `src/components/layout/MobileNav.tsx` (keep max 5 items)
+
+## New Training Plan
+
+1. Create `src/data/myPlan.ts` — export object matching `FitnessPlan` type from `gptPlan.ts`
+2. Add to `allPlans` in `src/features/plans/PlansPage.tsx`
+3. Add to `plans` map in `src/features/plans/PlanDetailPage.tsx`
+
+## New Store Action
+
+Add to the appropriate store (`trackingStore`, `goalsStore`, `userStore`):
+```ts
+myAction: (param) =>
+  set((s) => ({
+    myArray: [...s.myArray, { ...param, id: genId() }],
+  })),
+```
+
+## New Achievement
+
+Add to `defaultAchievements` array in `src/store/goalsStore.ts`:
+```ts
+{
+  id: 'unique_id',
+  title: 'Achievement Name',
+  description: 'What the user did',
+  icon: '🏆',
+  category: 'workout' | 'streak' | 'nutrition' | 'weight' | 'steps' | 'consistency',
+  requirement: 10,   // target number
+  unlocked: false,
+  progress: 0,
+}
+```
+
+## New Habit (default)
+
+Add to `habits` array in initial state of `src/store/goalsStore.ts`:
+```ts
+{
+  id: genId(),
+  name: 'Habit Name',
+  icon: '🎯',
+  color: '#C8FF00',
+  targetDaysPerWeek: 5,
+  completedDates: [],
+  createdAt: new Date().toISOString(),
+}
+```

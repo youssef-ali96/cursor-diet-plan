@@ -1,0 +1,59 @@
+---
+description: TypeScript patterns for FitForge — types, store usage, hooks
+globs: **/*.ts,**/*.tsx
+alwaysApply: false
+---
+
+# TypeScript Patterns
+
+## All types live in `src/types/index.ts`
+Never inline type definitions in feature files. Import from `@/types`.
+
+```ts
+import type { WorkoutLog, MealType, UserProfile } from '@/types';
+```
+
+## Zustand store usage
+```ts
+// ✅ Destructure only what you need
+const { addWorkout, getWorkoutsForDate } = useTrackingStore();
+
+// ✅ Selector to avoid re-renders
+const profile = useUserStore((s) => s.profile);
+```
+
+## Date handling
+```ts
+import { format, parseISO, subDays } from 'date-fns';
+import { today } from '@/lib/utils';
+
+const todayStr = today();                          // 'yyyy-MM-dd'
+const dateStr = format(new Date(), 'yyyy-MM-dd'); // explicit
+const parsed = parseISO(dateStr);                 // string → Date
+```
+
+## Store actions pattern
+```ts
+// Always spread existing state, never replace
+set((s) => ({ workouts: [...s.workouts, newItem] }))
+
+// For updates
+set((s) => ({
+  workouts: s.workouts.map((w) => w.id === id ? { ...w, ...updates } : w)
+}))
+```
+
+## Component prop types
+```ts
+// Inline for simple props
+function Card({ title, value }: { title: string; value: number }) {}
+
+// Interface for reusable components
+interface MetricCardProps {
+  label: string;
+  value: string;
+  color: string;
+  percent: number;
+  onAdd: () => void;
+}
+```

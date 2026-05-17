@@ -1,0 +1,30 @@
+---
+description: FitForge project-wide conventions — always apply these when working on this codebase
+alwaysApply: true
+---
+
+# FitForge Project Conventions
+
+## Imports
+- Always use `@/` path alias (never relative `../../`)
+- Always use `cn()` from `@/lib/utils` for conditional class merging
+- Date operations: always use `date-fns`, never `new Date().toLocaleDateString()`
+
+## State
+- All global state lives in `src/store/` — three stores: `userStore`, `trackingStore`, `goalsStore`
+- Never mutate store state directly — always use provided actions
+- New records always get IDs from `genId()` in `@/lib/utils`
+- Dates stored as `yyyy-MM-dd` strings: `format(new Date(), 'yyyy-MM-dd')`
+
+## Components
+- No business logic inside UI components — extract to `lib/utils.ts` or a custom hook
+- All pages wrap with `<AppLayout>` and start with `<PageHeader title="..." />`
+- Page content padding: `<div className="p-6 space-y-6">`
+
+## XP Awards
+Always call `addXP()` after user log actions:
+- Log workout → `addXP(50)`
+- Log meal → `addXP(20)`
+- Log weight → `addXP(10)`
+- Log steps → `addXP(5)`
+- Add water → `addXP(2)`
