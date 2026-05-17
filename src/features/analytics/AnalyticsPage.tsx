@@ -130,7 +130,7 @@ export function AnalyticsPage() {
             { label: 'Avg Steps', value: (avgSteps / 1000).toFixed(1), color: INFO, unit: 'k' },
             { label: 'Weight Change', value: weightChange ? (parseFloat(weightChange) < 0 ? `+${Math.abs(parseFloat(weightChange))}` : `-${weightChange}`) : '--', color: SUCCESS, unit: 'kg' },
           ].map(({ label, value, color, unit }) => (
-            <Card key={label} className="p-4 text-center">
+            <Card key={label} className="p-6 text-center">
               <p className="text-[10px] font-bold text-[#7A7A8C] uppercase tracking-wider mb-1">{label}</p>
               <p className="text-3xl font-black" style={{ fontFamily: "'Barlow Condensed', sans-serif", color }}>
                 {value}<span className="text-sm font-normal text-[#7A7A8C] ml-0.5">{unit}</span>
@@ -140,7 +140,7 @@ export function AnalyticsPage() {
         </div>
 
         {/* Weight chart */}
-        <Card className="p-5">
+        <Card className="p-7">
           <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Weight Progression</h3>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={weightData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
@@ -160,7 +160,7 @@ export function AnalyticsPage() {
         </Card>
 
         {/* Calorie trend */}
-        <Card className="p-5">
+        <Card className="p-7">
           <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Calorie Trend</h3>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={calorieData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
@@ -181,7 +181,7 @@ export function AnalyticsPage() {
         </Card>
 
         {/* Workout frequency */}
-        <Card className="p-5">
+        <Card className="p-7">
           <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Weekly Workout Frequency</h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={weeklyData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
@@ -196,7 +196,7 @@ export function AnalyticsPage() {
         </Card>
 
         {/* Steps trend */}
-        <Card className="p-5">
+        <Card className="p-7">
           <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Daily Steps</h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={stepsData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>

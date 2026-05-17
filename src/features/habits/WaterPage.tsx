@@ -96,7 +96,7 @@ export function WaterPage() {
             >
               <Minus size={16} />
             </Button>
-            <span className="text-xs text-[#7A7A8C] w-16 text-center">Adjust 250ml</span>
+            <span className="text-sm text-[#9A9AAC] w-16 text-center">Adjust 250ml</span>
             <Button variant="secondary" size="icon" onClick={() => addWater(250)}>
               <Plus size={16} />
             </Button>
@@ -105,18 +105,18 @@ export function WaterPage() {
 
         {/* Quick add buttons */}
         <div>
-          <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">Quick Add</p>
+          <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Quick Add</p>
           <div className="grid grid-cols-4 gap-4">
             {glasses.map(({ label, icon, ml }) => (
               <button
                 key={label}
                 onClick={() => addWater(ml)}
-                className="flex flex-col items-center gap-3 p-5 bg-[#17171A] border border-[#2A2A30] rounded-2xl hover:border-[#0A84FF]/50 hover:bg-[#0A84FF]/5 transition-all active:scale-95"
+                className="flex flex-col items-center gap-5 p-5 bg-[#17171A] border border-[#2A2A30] rounded-2xl hover:border-[#0A84FF]/50 hover:bg-[#0A84FF]/5 transition-all active:scale-95"
               >
                 <span className="text-3xl leading-none">{icon}</span>
                 <div>
-                  <p className="text-sm font-semibold text-[#F0F0F5] text-center">{label}</p>
-                  <p className="text-xs text-[#8A8A9C] text-center mt-0.5">{ml}ml</p>
+                  <p className="text-base font-semibold text-[#F0F0F5] text-center">{label}</p>
+                  <p className="text-sm text-[#8A8A9C] text-center mt-0.5">{ml}ml</p>
                 </div>
               </button>
             ))}
@@ -149,7 +149,7 @@ export function WaterPage() {
               );
             })}
           </div>
-          <div className="flex items-center gap-5 mt-4 text-xs text-[#9A9AAC]">
+          <div className="flex items-center gap-5 mt-4 text-sm text-[#9A9AAC]">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-sm bg-[#0A84FF]" /> Partial
             </div>

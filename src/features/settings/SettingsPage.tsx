@@ -65,7 +65,7 @@ export function SettingsPage() {
       <PageContent className="max-w-2xl">
         {/* Profile overview */}
         {profile && (
-          <Card className="p-5">
+          <Card className="p-7">
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#C8FF00] to-[#30D158] flex items-center justify-center text-2xl font-black text-[#0F0F11]">
                 {profile.name.charAt(0).toUpperCase()}
@@ -73,15 +73,15 @@ export function SettingsPage() {
               <div>
                 <p className="text-xl font-black text-[#F0F0F5]">{profile.name}</p>
                 <p className="text-sm text-[#7A7A8C]">Level {userLevel.level} · {userLevel.title}</p>
-                <p className="text-xs text-[#8A8A9C] mt-0.5">{workouts.length} workouts · {meals.length} meals logged</p>
+                <p className="text-sm text-[#8A8A9C] mt-0.5">{workouts.length} workouts · {meals.length} meals logged</p>
               </div>
             </div>
           </Card>
         )}
 
         {/* Edit profile */}
-        <Card className="p-5 space-y-4">
-          <h3 className="text-sm font-bold text-[#F0F0F5]">Edit Profile</h3>
+        <Card className="p-7 space-y-4">
+          <h3 className="text-base font-bold text-[#F0F0F5]">Edit Profile</h3>
 
           <Input label="Name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
 
@@ -117,7 +117,7 @@ export function SettingsPage() {
 
           {bmi && bmiCat && (
             <div className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: `${bmiCat.color}10`, border: `1px solid ${bmiCat.color}25` }}>
-              <span className="text-xs text-[#7A7A8C]">BMI</span>
+              <span className="text-sm text-[#9A9AAC]">BMI</span>
               <span className="text-sm font-bold" style={{ color: bmiCat.color }}>{bmi} · {bmiCat.label}</span>
             </div>
           )}
@@ -129,8 +129,8 @@ export function SettingsPage() {
         </Card>
 
         {/* Stats */}
-        <Card className="p-5">
-          <h3 className="text-sm font-bold text-[#F0F0F5] mb-4">Your Statistics</h3>
+        <Card className="p-7">
+          <h3 className="text-base font-bold text-[#F0F0F5] mb-4">Your Statistics</h3>
           <div className="grid grid-cols-2 gap-4">
             {[
               { label: 'Total Workouts', value: workouts.filter((w) => w.completed).length },
@@ -140,15 +140,15 @@ export function SettingsPage() {
             ].map(({ label, value }) => (
               <div key={label} className="bg-[#1E1E23] rounded-xl p-3 text-center">
                 <p className="text-2xl font-black text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>{value}</p>
-                <p className="text-xs text-[#7A7A8C]">{label}</p>
+                <p className="text-sm text-[#9A9AAC]">{label}</p>
               </div>
             ))}
           </div>
         </Card>
 
         {/* Data actions */}
-        <Card className="p-5 space-y-4">
-          <h3 className="text-sm font-bold text-[#F0F0F5]">Data Management</h3>
+        <Card className="p-7 space-y-4">
+          <h3 className="text-base font-bold text-[#F0F0F5]">Data Management</h3>
           <Button variant="secondary" size="lg" className="w-full gap-2" onClick={exportData}>
             <Download size={16} /> Export All Data (JSON)
           </Button>

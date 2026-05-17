@@ -47,8 +47,21 @@ export function PageHeader({ title, subtitle, actions }: PageHeaderProps) {
 
 export function PageContent({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`max-w-screen-xl mx-auto px-5 sm:px-10 py-8 sm:py-10 space-y-8 ${className}`}>
+    <div className={`max-w-screen-xl mx-auto px-6 sm:px-10 py-8 sm:py-10 space-y-10 ${className}`}>
       {children}
+    </div>
+  );
+}
+
+/** Visible section divider — lime accent bar + bold title */
+export function SectionTitle({ title, action }: { title: string; action?: ReactNode }) {
+  return (
+    <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center gap-3">
+        <div className="w-1 h-6 rounded-full bg-[#C8FF00]" />
+        <h2 className="text-base font-bold text-[#D0D0DA] tracking-wide">{title}</h2>
+      </div>
+      {action}
     </div>
   );
 }

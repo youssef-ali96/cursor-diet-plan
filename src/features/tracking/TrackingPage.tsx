@@ -65,20 +65,20 @@ export function TrackingPage() {
         </div>
 
         {/* Summary row */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
             { label: 'Calories', value: `${totalCalories}`, unit: 'kcal', color: '#C8FF00', percent: calPercent },
             { label: 'Steps', value: metrics.steps.toLocaleString(), unit: 'steps', color: '#0A84FF', percent: calcProgress(metrics.steps, metrics.stepsGoal) },
             { label: 'Water', value: formatWater(metrics.waterMl), unit: '', color: '#0A84FF', percent: calcProgress(metrics.waterMl, metrics.waterGoalMl) },
             { label: 'Weight', value: weight ? `${weight.weightKg}` : '--', unit: 'kg', color: '#FF9F0A', percent: 100 },
           ].map(({ label, value, unit, color, percent }) => (
-            <Card key={label} className="p-4 text-center">
-              <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-2">{label}</p>
-              <p className="text-2xl font-black leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", color }}>
+            <Card key={label} className="p-6 text-center">
+              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">{label}</p>
+              <p className="text-3xl font-black leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", color }}>
                 {value}
               </p>
-              {unit && <p className="text-xs text-[#7A7A8C] mt-0.5">{unit}</p>}
-              <ProgressBar value={percent} color={color} height={3} className="mt-3" />
+              {unit && <p className="text-sm text-[#9A9AAC] mt-1">{unit}</p>}
+              <ProgressBar value={percent} color={color} height={8} className="mt-4" />
             </Card>
           ))}
         </div>
@@ -92,21 +92,21 @@ export function TrackingPage() {
           emptyText="No workouts logged for this day"
         >
           {workouts.map((w) => (
-            <Card key={w.id} className="p-4 flex items-center gap-4">
+            <Card key={w.id} className="p-6 flex items-center gap-4">
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-[#0F0F11]"
+                className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 text-[#0F0F11]"
                 style={{ backgroundColor: workoutTypeColors[w.type] + '20' }}
               >
                 <Dumbbell size={16} style={{ color: workoutTypeColors[w.type] }} />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <p className="text-sm font-semibold text-[#F0F0F5] truncate">{w.name}</p>
+                  <p className="text-base font-semibold text-[#F0F0F5] truncate">{w.name}</p>
                   {w.completed && <span className="text-[#30D158] text-xs">✓</span>}
                 </div>
-                <p className="text-xs text-[#9A9AAC] mt-0.5">{w.durationMin} min · {w.caloriesBurned ?? 0} kcal burned</p>
+                <p className="text-sm text-[#9A9AAC] mt-0.5">{w.durationMin} min · {w.caloriesBurned ?? 0} kcal burned</p>
                 {w.exercises.length > 0 && (
-                  <p className="text-xs text-[#7A7A8C] mt-0.5">{w.exercises.length} exercises</p>
+                  <p className="text-sm text-[#9A9AAC] mt-0.5">{w.exercises.length} exercises</p>
                 )}
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -138,12 +138,12 @@ export function TrackingPage() {
                   <p className="text-xs font-bold text-[#C8FF00]">{typeTotal} kcal</p>
                 </div>
                 {typeMeals.map((m) => (
-                  <Card key={m.id} className="p-4 flex items-center gap-4">
+                  <Card key={m.id} className="p-6 flex items-center gap-4">
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-[#F0F0F5]">
+                      <p className="text-base font-semibold text-[#F0F0F5]">
                         {m.items.map((i) => i.name).join(', ')}
                       </p>
-                      <p className="text-xs text-[#9A9AAC] mt-1">{m.totalCalories} kcal · {m.items.reduce((a, i) => a + i.proteinG, 0)}g protein</p>
+                      <p className="text-sm text-[#9A9AAC] mt-1">{m.totalCalories} kcal · {m.items.reduce((a, i) => a + i.proteinG, 0)}g protein</p>
                     </div>
                     <Button variant="ghost" size="icon" className="w-8 h-8 shrink-0" onClick={() => deleteMeal(m.id)}>
                       <Trash2 size={13} />
@@ -164,14 +164,14 @@ export function TrackingPage() {
           emptyText="No weight entry for this day"
         >
           {weight && (
-            <Card className="p-4 flex items-center justify-between">
+            <Card className="p-6 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[#FF9F0A]/10 flex items-center justify-center">
+                <div className="w-14 h-14 rounded-2xl bg-[#FF9F0A]/10 flex items-center justify-center">
                   <Scale size={16} className="text-[#FF9F0A]" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-[#F0F0F5]">Body Weight</p>
-                  <p className="text-xs text-[#7A7A8C]">{formatDate(weight.date, 'h:mm a')}</p>
+                  <p className="text-base font-semibold text-[#F0F0F5]">Body Weight</p>
+                  <p className="text-sm text-[#9A9AAC]">{formatDate(weight.date, 'h:mm a')}</p>
                 </div>
               </div>
               <div className="text-right">
@@ -179,7 +179,7 @@ export function TrackingPage() {
                   {weight.weightKg} kg
                 </p>
                 {weight.bodyFatPercent && (
-                  <p className="text-xs text-[#7A7A8C]">{weight.bodyFatPercent}% body fat</p>
+                  <p className="text-sm text-[#9A9AAC]">{weight.bodyFatPercent}% body fat</p>
                 )}
               </div>
             </Card>
@@ -194,31 +194,31 @@ export function TrackingPage() {
           empty={false}
         >
           <div className="grid grid-cols-2 gap-4">
-            <Card className="p-5">
-              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Steps</p>
+            <Card className="p-7">
+              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Steps</p>
               <p className="text-3xl font-black text-[#0A84FF]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                 {metrics.steps.toLocaleString()}
               </p>
               <ProgressBar
                 value={calcProgress(metrics.steps, metrics.stepsGoal)}
                 color="#0A84FF"
-                height={5}
+                height={8}
                 className="mt-3"
               />
-              <p className="text-xs text-[#7A7A8C] mt-2">Goal: {metrics.stepsGoal.toLocaleString()}</p>
+              <p className="text-sm text-[#9A9AAC] mt-2">Goal: {metrics.stepsGoal.toLocaleString()}</p>
             </Card>
-            <Card className="p-5">
-              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Water</p>
+            <Card className="p-7">
+              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Water</p>
               <p className="text-3xl font-black text-[#30D158]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                 {formatWater(metrics.waterMl)}
               </p>
               <ProgressBar
                 value={calcProgress(metrics.waterMl, metrics.waterGoalMl)}
                 color="#30D158"
-                height={5}
+                height={8}
                 className="mt-3"
               />
-              <p className="text-xs text-[#7A7A8C] mt-2">Goal: {formatWater(metrics.waterGoalMl)}</p>
+              <p className="text-sm text-[#9A9AAC] mt-2">Goal: {formatWater(metrics.waterGoalMl)}</p>
             </Card>
           </div>
         </Section>
@@ -237,26 +237,27 @@ function Section({
 }) {
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-[#2A2A30] flex items-center justify-center text-[#C8FF00]">
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-7 rounded-full bg-[#C8FF00]" />
+          <div className="w-9 h-9 rounded-xl bg-[#C8FF00]/10 flex items-center justify-center text-[#C8FF00]">
             {icon}
           </div>
-          <span className="text-sm font-bold text-[#E0E0EA] tracking-wide">{title}</span>
+          <span className="text-base font-bold text-[#E0E0EA]">{title}</span>
         </div>
         <button
           onClick={onAdd}
-          className="flex items-center gap-1 text-xs font-bold text-[#C8FF00] hover:text-[#DEFF66] px-2.5 py-1.5 rounded-lg hover:bg-[#C8FF00]/10 transition-colors"
+          className="flex items-center gap-1.5 text-sm font-bold text-[#C8FF00] px-4 py-2 rounded-xl bg-[#C8FF00]/10 hover:bg-[#C8FF00]/20 transition-colors"
         >
-          <Plus size={13} /> Add
+          <Plus size={14} /> Add
         </button>
       </div>
       {empty ? (
-        <div className="flex items-center justify-center py-10 border border-dashed border-[#2A2A30] rounded-2xl">
-          <div className="text-center">
-            <p className="text-sm text-[#7A7A8C]">{emptyText}</p>
-            <Button variant="outline" size="sm" className="mt-4" onClick={onAdd}>
-              <Plus size={14} /> Add Entry
+        <div className="flex items-center justify-center py-14 border-2 border-dashed border-[#2A2A30] rounded-2xl">
+          <div className="text-center px-6">
+            <p className="text-base text-[#9A9AAC] mb-4">{emptyText}</p>
+            <Button variant="outline" onClick={onAdd} className="gap-2">
+              <Plus size={15} /> Add Entry
             </Button>
           </div>
         </div>

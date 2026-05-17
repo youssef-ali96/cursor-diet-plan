@@ -63,7 +63,7 @@ export function AchievementsPage() {
         {/* Unlocked achievements */}
         {unlocked.length > 0 && (
           <div>
-            <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">Unlocked ({unlocked.length})</h2>
+            <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Unlocked ({unlocked.length})</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {unlocked.map((achievement) => (
                 <AchievementCard key={achievement.id} achievement={achievement} unlocked />
@@ -75,7 +75,7 @@ export function AchievementsPage() {
         {/* Locked achievements */}
         {locked.length > 0 && (
           <div>
-            <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">In Progress ({locked.length})</h2>
+            <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">In Progress ({locked.length})</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {locked.map((achievement) => (
                 <AchievementCard key={achievement.id} achievement={achievement} unlocked={false} />
@@ -120,15 +120,15 @@ function AchievementCard({
         <p className="text-sm text-[#9A9AAC] leading-snug">{achievement.description}</p>
         {!unlocked && (
           <div className="mt-3">
-            <div className="flex items-center justify-between text-xs text-[#7A7A8C] mb-1.5">
+            <div className="flex items-center justify-between text-sm text-[#9A9AAC] mb-1.5">
               <span>{achievement.progress} / {achievement.requirement}</span>
               <span className="font-bold">{pct}%</span>
             </div>
-            <ProgressBar value={pct} color="#C8FF00" height={4} />
+            <ProgressBar value={pct} color="#C8FF00" height={7} />
           </div>
         )}
         {unlocked && achievement.unlockedAt && (
-          <p className="text-xs text-[#7A7A8C] mt-2">
+          <p className="text-sm text-[#9A9AAC] mt-2">
             Unlocked {format(parseISO(achievement.unlockedAt), 'MMM d, yyyy')}
           </p>
         )}

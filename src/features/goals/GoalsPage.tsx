@@ -120,7 +120,7 @@ export function GoalsPage() {
           {goalItems.map((item) => {
             const pct = calcProgress(item.current, item.target);
             return (
-              <Card key={item.id} className="p-5 flex flex-col items-center text-center gap-4">
+              <Card key={item.id} className="p-7 flex flex-col items-center text-center gap-4">
                 <CircularProgress value={pct} size={76} strokeWidth={5} color={item.color}>
                   <span className="text-sm font-bold" style={{ color: item.color }}>{pct}%</span>
                 </CircularProgress>
@@ -140,7 +140,7 @@ export function GoalsPage() {
           {goalItems.map((item) => {
             const pct = calcProgress(item.current, item.target);
             return (
-              <Card key={item.id} className="p-5">
+              <Card key={item.id} className="p-7">
                 <div className="flex items-center gap-4">
                   <div
                     className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 text-xl"
@@ -162,7 +162,7 @@ export function GoalsPage() {
                     </div>
                     <ProgressBar value={pct} color={item.color} height={7} animated />
                     <div className="flex items-center justify-between mt-2">
-                      <p className="text-xs text-[#9A9AAC]">
+                      <p className="text-sm text-[#9A9AAC]">
                         {typeof item.current === 'number' ? item.current.toLocaleString() : item.current} {item.unit}
                       </p>
                       {editing ? (

@@ -67,15 +67,15 @@ function PlanCard({ plan, onClick }: { plan: FitnessPlan; onClick: () => void })
         {/* Footer */}
         <div className="bg-[#17171A] p-4 flex items-center justify-between">
           <div className="flex items-center gap-5">
-            <div className="flex items-center gap-1.5 text-xs text-[#7A7A8C]">
+            <div className="flex items-center gap-1.5 text-sm text-[#9A9AAC]">
               <Clock size={13} />
               <span>{plan.duration}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-[#7A7A8C]">
+            <div className="flex items-center gap-1.5 text-sm text-[#9A9AAC]">
               <BarChart3 size={13} />
               <span>{plan.difficulty}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-[#7A7A8C]">
+            <div className="flex items-center gap-1.5 text-sm text-[#9A9AAC]">
               <Target size={13} />
               <span>{plan.days.length} days</span>
             </div>

@@ -112,7 +112,7 @@ export function PhotosPage() {
             >
               <Upload size={32} className="text-[#8A8A9C]" />
               <p className="text-sm text-[#7A7A8C]">Click to upload photo</p>
-              <p className="text-xs text-[#8A8A9C]">JPG, PNG, WEBP supported</p>
+              <p className="text-sm text-[#8A8A9C]">JPG, PNG, WEBP supported</p>
             </button>
           ) : (
             <div className="relative aspect-[3/4] max-h-64 rounded-2xl overflow-hidden">
@@ -168,7 +168,7 @@ export function PhotosPage() {
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#1E1E23]">
                   <img src={progressPhotos[compareIdx1]?.url} alt="before" className="w-full h-full object-cover" />
                 </div>
-                <p className="text-xs text-[#7A7A8C] text-center">
+                <p className="text-sm text-[#9A9AAC] text-center">
                   {progressPhotos[compareIdx1] && format(parseISO(progressPhotos[compareIdx1].date), 'MMM d, yyyy')}
                 </p>
               </div>
@@ -177,7 +177,7 @@ export function PhotosPage() {
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#1E1E23]">
                   <img src={progressPhotos[compareIdx2]?.url} alt="after" className="w-full h-full object-cover" />
                 </div>
-                <p className="text-xs text-[#7A7A8C] text-center">
+                <p className="text-sm text-[#9A9AAC] text-center">
                   {progressPhotos[compareIdx2] && format(parseISO(progressPhotos[compareIdx2].date), 'MMM d, yyyy')}
                 </p>
               </div>

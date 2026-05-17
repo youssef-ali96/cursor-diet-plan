@@ -92,7 +92,7 @@ export function HabitsPage() {
               return (
                 <Card
                 key={habit.id}
-                className="p-5"
+                className="p-7"
                 style={isDoneToday ? { borderColor: `${habit.color}30` } : {}}
               >
                   <div className="flex items-center gap-4">

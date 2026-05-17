@@ -56,7 +56,7 @@ export function InsightsPage() {
 
         {/* Trend summary */}
         <div className="grid sm:grid-cols-3 gap-4">
-          <Card className="p-5 text-center">
+          <Card className="p-7 text-center">
             <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">14-Day Weight Trend</p>
             <p className="text-4xl font-black leading-none" style={{
               fontFamily: "'Barlow Condensed', sans-serif",
@@ -69,7 +69,7 @@ export function InsightsPage() {
             </p>
           </Card>
 
-          <Card className="p-5 text-center">
+          <Card className="p-7 text-center">
             <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Weekly Workouts</p>
             <p className="text-4xl font-black leading-none text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
               {thisWeekCount}
@@ -79,7 +79,7 @@ export function InsightsPage() {
             </p>
           </Card>
 
-          <Card className="p-5 text-center">
+          <Card className="p-7 text-center">
             <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Current Streak</p>
             <p className="text-4xl font-black leading-none text-[#FF9F0A]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
               {streak.currentStreak} 🔥
@@ -90,7 +90,7 @@ export function InsightsPage() {
 
         {/* Insights list */}
         <div>
-          <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">
+          <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">
             Generated Insights ({insights.length})
           </h2>
           <div className="space-y-4">

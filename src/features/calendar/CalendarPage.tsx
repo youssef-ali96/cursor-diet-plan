@@ -67,7 +67,7 @@ export function CalendarPage() {
         </div>
 
         {/* Legend */}
-        <div className="flex items-center gap-4 text-xs text-[#7A7A8C]">
+        <div className="flex items-center gap-4 text-sm text-[#9A9AAC]">
           <div className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full bg-[#C8FF00]" />
             <span>Workout</span>
@@ -87,7 +87,7 @@ export function CalendarPage() {
           {/* Day headers */}
           <div className="grid grid-cols-7 border-b border-[#2A2A30]">
             {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
-              <div key={d} className="p-3 text-center text-[10px] font-bold text-[#8A8A9C] uppercase tracking-wider">
+              <div key={d} className="p-7 text-center text-[10px] font-bold text-[#8A8A9C] uppercase tracking-wider">
                 {d}
               </div>
             ))}
@@ -172,13 +172,13 @@ export function CalendarPage() {
               color: '#FF9F0A',
             },
           ].map(({ label, value, icon, color }) => (
-            <Card key={label} className="p-4 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${color}15`, color }}>
+            <Card key={label} className="p-6 flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${color}15`, color }}>
                 {icon}
               </div>
               <div>
                 <p className="text-2xl font-black" style={{ fontFamily: "'Barlow Condensed', sans-serif", color }}>{value}</p>
-                <p className="text-xs text-[#7A7A8C]">{label} this month</p>
+                <p className="text-sm text-[#9A9AAC]">{label} this month</p>
               </div>
             </Card>
           ))}
@@ -223,8 +223,8 @@ function DayDetail({ data }: { data: ReturnType<typeof useTrackingStore.getState
             {data.workouts.map((w: any) => (
               <div key={w.id} className="flex items-center justify-between p-3 bg-[#1E1E23] rounded-xl">
                 <div>
-                  <p className="text-sm font-semibold text-[#F0F0F5]">{w.name}</p>
-                  <p className="text-xs text-[#7A7A8C]">{w.durationMin} min · {w.caloriesBurned ?? 0} kcal</p>
+                  <p className="text-base font-semibold text-[#F0F0F5]">{w.name}</p>
+                  <p className="text-sm text-[#9A9AAC]">{w.durationMin} min · {w.caloriesBurned ?? 0} kcal</p>
                 </div>
                 {w.completed && <span className="text-[#30D158] text-sm">✓ Done</span>}
               </div>
