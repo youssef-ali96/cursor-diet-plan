@@ -36,18 +36,18 @@ export function InsightsPage() {
       <PageContent>
         {/* Body stats card */}
         {profile && (
-          <Card className="p-5">
-            <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Body Overview</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <Card className="p-6">
+            <h3 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Body Overview</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
                 { label: 'Current Weight', value: formatWeight(profile.currentWeightKg), color: '#FF9F0A' },
                 { label: 'Goal Weight', value: formatWeight(profile.goalWeightKg), color: '#30D158' },
                 { label: 'To Go', value: formatWeight(Math.abs(profile.currentWeightKg - profile.goalWeightKg)), color: '#0A84FF' },
                 { label: 'BMI', value: bmi ? `${bmi} (${bmiCat?.label})` : '--', color: bmiCat?.color ?? '#C8FF00' },
               ].map(({ label, value, color }) => (
-                <div key={label} className="text-center p-3 bg-[#1E1E23] rounded-xl">
-                  <p className="text-[10px] font-semibold text-[#7A7A8C] uppercase tracking-wider mb-1">{label}</p>
-                  <p className="text-sm font-bold" style={{ color }}>{value}</p>
+                <div key={label} className="text-center p-4 bg-[#1E1E23] rounded-2xl">
+                  <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-2">{label}</p>
+                  <p className="text-base font-bold" style={{ color }}>{value}</p>
                 </div>
               ))}
             </div>
@@ -56,41 +56,41 @@ export function InsightsPage() {
 
         {/* Trend summary */}
         <div className="grid sm:grid-cols-3 gap-4">
-          <Card className="p-4 text-center">
-            <p className="text-[10px] font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">14-Day Weight Trend</p>
-            <p className="text-3xl font-black" style={{
+          <Card className="p-5 text-center">
+            <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">14-Day Weight Trend</p>
+            <p className="text-4xl font-black leading-none" style={{
               fontFamily: "'Barlow Condensed', sans-serif",
-              color: weightTrend > 0 ? '#30D158' : weightTrend < 0 ? '#FF4560' : '#7A7A8C'
+              color: weightTrend > 0 ? '#30D158' : weightTrend < 0 ? '#FF4560' : '#8A8A9C'
             }}>
-              {weightTrend > 0 ? '-' : '+'}{Math.abs(weightTrend).toFixed(1)} kg
+              {weightTrend > 0 ? '−' : '+'}{Math.abs(weightTrend).toFixed(1)} kg
             </p>
-            <p className="text-xs text-[#7A7A8C] mt-1">
+            <p className="text-sm text-[#9A9AAC] mt-2">
               {weightTrend > 0 ? '✅ Losing weight' : weightTrend < 0 ? '📈 Gaining weight' : 'Stable'}
             </p>
           </Card>
 
-          <Card className="p-4 text-center">
-            <p className="text-[10px] font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">Weekly Workouts</p>
-            <p className="text-3xl font-black text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+          <Card className="p-5 text-center">
+            <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Weekly Workouts</p>
+            <p className="text-4xl font-black leading-none text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
               {thisWeekCount}
             </p>
-            <p className="text-xs text-[#7A7A8C] mt-1">
+            <p className="text-sm text-[#9A9AAC] mt-2">
               {thisWeekCount > lastWeekCount ? `+${thisWeekCount - lastWeekCount} vs last week` : thisWeekCount === lastWeekCount ? 'Same as last week' : `${lastWeekCount - thisWeekCount} less than last week`}
             </p>
           </Card>
 
-          <Card className="p-4 text-center">
-            <p className="text-[10px] font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">Current Streak</p>
-            <p className="text-3xl font-black text-[#FF9F0A]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+          <Card className="p-5 text-center">
+            <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Current Streak</p>
+            <p className="text-4xl font-black leading-none text-[#FF9F0A]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
               {streak.currentStreak} 🔥
             </p>
-            <p className="text-xs text-[#7A7A8C] mt-1">Best: {streak.longestStreak} days</p>
+            <p className="text-sm text-[#9A9AAC] mt-2">Best: {streak.longestStreak} days</p>
           </Card>
         </div>
 
         {/* Insights list */}
         <div>
-          <h2 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-3">
+          <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">
             Generated Insights ({insights.length})
           </h2>
           <div className="space-y-3">
@@ -99,21 +99,21 @@ export function InsightsPage() {
               return (
                 <div
                   key={i}
-                  className="flex gap-4 p-4 rounded-2xl border transition-all"
-                  style={{ backgroundColor: `${color}06`, borderColor: `${color}20` }}
+                  className="flex gap-4 p-5 rounded-2xl border transition-all hover:-translate-y-0.5"
+                  style={{ backgroundColor: `${color}08`, borderColor: `${color}22` }}
                 >
-                  <span className="text-2xl shrink-0">{insight.icon}</span>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm font-bold" style={{ color }}>{insight.title}</p>
+                  <span className="text-2xl shrink-0 mt-0.5">{insight.icon}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="text-base font-bold" style={{ color }}>{insight.title}</p>
                       <span
-                        className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+                        className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full"
                         style={{ backgroundColor: `${color}20`, color }}
                       >
                         {insight.type}
                       </span>
                     </div>
-                    <p className="text-sm text-[#7A7A8C] mt-1 leading-relaxed">{insight.description}</p>
+                    <p className="text-sm text-[#9A9AAC] mt-1.5 leading-relaxed">{insight.description}</p>
                   </div>
                 </div>
               );
@@ -131,8 +131,8 @@ export function InsightsPage() {
         </div>
 
         {/* Recommendations */}
-        <Card className="p-5">
-          <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Recommendations</h3>
+        <Card className="p-6">
+          <h3 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Recommendations</h3>
           <div className="space-y-3">
             {[
               { icon: '🥗', title: 'Track Every Meal', desc: 'Consistent meal logging is the #1 predictor of successful weight management.', color: '#30D158' },
@@ -140,11 +140,11 @@ export function InsightsPage() {
               { icon: '😴', title: 'Prioritize Sleep', desc: 'Aim for 7–9 hours. Poor sleep increases cortisol and slows metabolism.', color: '#BF5AF2' },
               { icon: '📈', title: 'Progressive Overload', desc: 'Increase weights by 2.5–5% every 1–2 weeks to keep making progress.', color: '#C8FF00' },
             ].map(({ icon, title, desc, color }) => (
-              <div key={title} className="flex gap-3 p-3 rounded-xl bg-[#1E1E23]">
-                <span className="text-xl shrink-0">{icon}</span>
-                <div>
-                  <p className="text-sm font-semibold" style={{ color }}>{title}</p>
-                  <p className="text-xs text-[#7A7A8C] mt-0.5">{desc}</p>
+              <div key={title} className="flex gap-4 p-4 rounded-2xl bg-[#1E1E23]">
+                <span className="text-2xl shrink-0 mt-0.5">{icon}</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold" style={{ color }}>{title}</p>
+                  <p className="text-sm text-[#9A9AAC] mt-1 leading-relaxed">{desc}</p>
                 </div>
               </div>
             ))}

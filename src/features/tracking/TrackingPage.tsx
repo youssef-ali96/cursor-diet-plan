@@ -72,12 +72,13 @@ export function TrackingPage() {
             { label: 'Water', value: formatWater(metrics.waterMl), unit: '', color: '#0A84FF', percent: calcProgress(metrics.waterMl, metrics.waterGoalMl) },
             { label: 'Weight', value: weight ? `${weight.weightKg}` : '--', unit: 'kg', color: '#FF9F0A', percent: 100 },
           ].map(({ label, value, unit, color, percent }) => (
-            <Card key={label} className="p-3 text-center">
-              <p className="text-[10px] font-semibold text-[#7A7A8C] uppercase tracking-wider mb-1">{label}</p>
-              <p className="text-xl font-black" style={{ fontFamily: "'Barlow Condensed', sans-serif", color }}>
-                {value}<span className="text-xs font-normal text-[#7A7A8C] ml-0.5">{unit}</span>
+            <Card key={label} className="p-4 text-center">
+              <p className="text-[11px] font-bold text-[#8A8A9C] uppercase tracking-widest mb-2">{label}</p>
+              <p className="text-2xl font-black leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", color }}>
+                {value}
               </p>
-              <ProgressBar value={percent} color={color} height={3} className="mt-2" />
+              {unit && <p className="text-xs text-[#7A7A8C] mt-0.5">{unit}</p>}
+              <ProgressBar value={percent} color={color} height={3} className="mt-3" />
             </Card>
           ))}
         </div>
@@ -103,9 +104,9 @@ export function TrackingPage() {
                   <p className="text-sm font-semibold text-[#F0F0F5] truncate">{w.name}</p>
                   {w.completed && <span className="text-[#30D158] text-xs">✓</span>}
                 </div>
-                <p className="text-xs text-[#7A7A8C]">{w.durationMin} min · {w.caloriesBurned ?? 0} kcal burned</p>
+                <p className="text-xs text-[#9A9AAC] mt-0.5">{w.durationMin} min · {w.caloriesBurned ?? 0} kcal burned</p>
                 {w.exercises.length > 0 && (
-                  <p className="text-xs text-[#4A4A5A] mt-0.5">{w.exercises.length} exercises</p>
+                  <p className="text-xs text-[#7A7A8C] mt-0.5">{w.exercises.length} exercises</p>
                 )}
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -131,26 +132,24 @@ export function TrackingPage() {
             if (typeMeals.length === 0) return null;
             const typeTotal = typeMeals.reduce((a, m) => a + m.totalCalories, 0);
             return (
-              <div key={mealType}>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-xs font-semibold text-[#7A7A8C] uppercase tracking-wider capitalize">{mealType}</p>
-                  <p className="text-xs font-bold" style={{ color: '#C8FF00' }}>{typeTotal} kcal</p>
+              <div key={mealType} className="space-y-2">
+                <div className="flex items-center justify-between px-1">
+                  <p className="text-xs font-bold text-[#9A9AAC] uppercase tracking-widest capitalize">{mealType}</p>
+                  <p className="text-xs font-bold text-[#C8FF00]">{typeTotal} kcal</p>
                 </div>
-                <div className="space-y-2">
-                  {typeMeals.map((m) => (
-                    <Card key={m.id} className="p-3.5 flex items-center gap-3">
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-[#F0F0F5]">
-                          {m.items.map((i) => i.name).join(', ')}
-                        </p>
-                        <p className="text-xs text-[#7A7A8C]">{m.totalCalories} kcal · {m.items.reduce((a, i) => a + i.proteinG, 0)}g protein</p>
-                      </div>
-                      <Button variant="ghost" size="icon" className="w-7 h-7 shrink-0" onClick={() => deleteMeal(m.id)}>
-                        <Trash2 size={12} />
-                      </Button>
-                    </Card>
-                  ))}
-                </div>
+                {typeMeals.map((m) => (
+                  <Card key={m.id} className="p-4 flex items-center gap-3">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-[#F0F0F5]">
+                        {m.items.map((i) => i.name).join(', ')}
+                      </p>
+                      <p className="text-xs text-[#9A9AAC] mt-1">{m.totalCalories} kcal · {m.items.reduce((a, i) => a + i.proteinG, 0)}g protein</p>
+                    </div>
+                    <Button variant="ghost" size="icon" className="w-8 h-8 shrink-0" onClick={() => deleteMeal(m.id)}>
+                      <Trash2 size={13} />
+                    </Button>
+                  </Card>
+                ))}
               </div>
             );
           })}
@@ -195,31 +194,31 @@ export function TrackingPage() {
           empty={false}
         >
           <div className="grid grid-cols-2 gap-3">
-            <Card className="p-4">
-              <p className="text-xs text-[#7A7A8C] mb-2">Steps</p>
-              <p className="text-2xl font-black text-[#0A84FF]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+            <Card className="p-5">
+              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Steps</p>
+              <p className="text-3xl font-black text-[#0A84FF]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                 {metrics.steps.toLocaleString()}
               </p>
               <ProgressBar
                 value={calcProgress(metrics.steps, metrics.stepsGoal)}
                 color="#0A84FF"
-                height={4}
-                className="mt-2"
+                height={5}
+                className="mt-3"
               />
-              <p className="text-xs text-[#4A4A5A] mt-1">Goal: {metrics.stepsGoal.toLocaleString()}</p>
+              <p className="text-xs text-[#7A7A8C] mt-2">Goal: {metrics.stepsGoal.toLocaleString()}</p>
             </Card>
-            <Card className="p-4">
-              <p className="text-xs text-[#7A7A8C] mb-2">Water</p>
-              <p className="text-2xl font-black text-[#0A84FF]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+            <Card className="p-5">
+              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Water</p>
+              <p className="text-3xl font-black text-[#30D158]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                 {formatWater(metrics.waterMl)}
               </p>
               <ProgressBar
                 value={calcProgress(metrics.waterMl, metrics.waterGoalMl)}
                 color="#30D158"
-                height={4}
-                className="mt-2"
+                height={5}
+                className="mt-3"
               />
-              <p className="text-xs text-[#4A4A5A] mt-1">Goal: {formatWater(metrics.waterGoalMl)}</p>
+              <p className="text-xs text-[#7A7A8C] mt-2">Goal: {formatWater(metrics.waterGoalMl)}</p>
             </Card>
           </div>
         </Section>
@@ -238,26 +237,31 @@ function Section({
 }) {
   return (
     <div>
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2 text-sm font-bold text-[#F0F0F5] uppercase tracking-wider">
-          <span className="text-[#7A7A8C]">{icon}</span>
-          {title}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-[#2A2A30] flex items-center justify-center text-[#C8FF00]">
+            {icon}
+          </div>
+          <span className="text-sm font-bold text-[#E0E0EA] tracking-wide">{title}</span>
         </div>
-        <Button variant="ghost" size="sm" onClick={onAdd} className="gap-1 text-[#C8FF00]">
-          <Plus size={14} /> Add
-        </Button>
+        <button
+          onClick={onAdd}
+          className="flex items-center gap-1 text-xs font-bold text-[#C8FF00] hover:text-[#DEFF66] px-2.5 py-1.5 rounded-lg hover:bg-[#C8FF00]/10 transition-colors"
+        >
+          <Plus size={13} /> Add
+        </button>
       </div>
       {empty ? (
-        <div className="flex items-center justify-center p-8 border border-dashed border-[#2A2A30] rounded-2xl">
+        <div className="flex items-center justify-center py-10 border border-dashed border-[#2A2A30] rounded-2xl">
           <div className="text-center">
-            <p className="text-sm text-[#4A4A5A]">{emptyText}</p>
-            <Button variant="outline" size="sm" className="mt-3" onClick={onAdd}>
+            <p className="text-sm text-[#7A7A8C]">{emptyText}</p>
+            <Button variant="outline" size="sm" className="mt-4" onClick={onAdd}>
               <Plus size={14} /> Add Entry
             </Button>
           </div>
         </div>
       ) : (
-        <div className="space-y-2">{children}</div>
+        <div className="space-y-3">{children}</div>
       )}
     </div>
   );

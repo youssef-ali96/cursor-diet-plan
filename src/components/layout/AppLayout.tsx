@@ -47,7 +47,7 @@ export function PageHeader({ title, subtitle, actions }: PageHeaderProps) {
 
 export function PageContent({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`max-w-screen-xl mx-auto px-4 sm:px-6 py-6 space-y-6 ${className}`}>
+    <div className={`max-w-screen-xl mx-auto px-5 sm:px-8 py-8 space-y-8 ${className}`}>
       {children}
     </div>
   );

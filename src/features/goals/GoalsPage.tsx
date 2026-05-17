@@ -120,14 +120,16 @@ export function GoalsPage() {
           {goalItems.map((item) => {
             const pct = calcProgress(item.current, item.target);
             return (
-              <Card key={item.id} className="p-4 flex flex-col items-center text-center gap-2">
-                <CircularProgress value={pct} size={72} strokeWidth={5} color={item.color}>
-                  <span className="text-xs font-bold" style={{ color: item.color }}>{pct}%</span>
+              <Card key={item.id} className="p-5 flex flex-col items-center text-center gap-3">
+                <CircularProgress value={pct} size={76} strokeWidth={5} color={item.color}>
+                  <span className="text-sm font-bold" style={{ color: item.color }}>{pct}%</span>
                 </CircularProgress>
-                <p className="text-[11px] font-semibold text-[#F0F0F5]">{item.label}</p>
-                <p className="text-[10px] text-[#7A7A8C]">
-                  {typeof item.current === 'number' ? item.current.toLocaleString() : item.current} / {typeof item.target === 'number' ? item.target.toLocaleString() : item.target} {item.unit}
-                </p>
+                <div>
+                  <p className="text-xs font-bold text-[#E0E0EA]">{item.label}</p>
+                  <p className="text-[11px] text-[#8A8A9C] mt-0.5">
+                    {typeof item.current === 'number' ? item.current.toLocaleString() : item.current} / {typeof item.target === 'number' ? item.target.toLocaleString() : item.target} {item.unit}
+                  </p>
+                </div>
               </Card>
             );
           })}
@@ -142,25 +144,25 @@ export function GoalsPage() {
                 <div className="flex items-center gap-4">
                   <div
                     className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 text-xl"
-                    style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                    style={{ backgroundColor: `${item.color}18`, color: item.color }}
                   >
                     {typeof item.icon === 'string' ? item.icon : item.icon}
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm font-semibold text-[#F0F0F5]">{item.label}</p>
+                    <div className="flex items-center justify-between mb-2.5">
+                      <p className="text-base font-semibold text-[#E0E0EA]">{item.label}</p>
                       {pct >= 100 ? (
-                        <span className="text-xs font-bold text-[#30D158] bg-[#30D158]/10 px-2 py-0.5 rounded-full">
+                        <span className="text-xs font-bold text-[#30D158] bg-[#30D158]/10 px-2.5 py-1 rounded-full">
                           ✓ Complete
                         </span>
                       ) : (
-                        <span className="text-xs font-bold" style={{ color: item.color }}>{pct}%</span>
+                        <span className="text-sm font-bold" style={{ color: item.color }}>{pct}%</span>
                       )}
                     </div>
-                    <ProgressBar value={pct} color={item.color} height={6} animated />
-                    <div className="flex items-center justify-between mt-1.5">
-                      <p className="text-xs text-[#7A7A8C]">
+                    <ProgressBar value={pct} color={item.color} height={7} animated />
+                    <div className="flex items-center justify-between mt-2">
+                      <p className="text-xs text-[#9A9AAC]">
                         {typeof item.current === 'number' ? item.current.toLocaleString() : item.current} {item.unit}
                       </p>
                       {editing ? (
@@ -171,7 +173,7 @@ export function GoalsPage() {
                           className="w-24 h-7 text-xs text-right bg-[#1E1E23] border border-[#C8FF00]/40 rounded-lg px-2 text-[#C8FF00] outline-none"
                         />
                       ) : (
-                        <p className="text-xs font-medium text-[#7A7A8C]">
+                        <p className="text-xs font-medium text-[#9A9AAC]">
                           Goal: {typeof item.target === 'number' ? item.target.toLocaleString() : item.target} {item.unit}
                         </p>
                       )}
@@ -184,12 +186,12 @@ export function GoalsPage() {
         </div>
 
         {/* Tips */}
-        <Card className="p-5 border-[#C8FF00]/20 bg-[#C8FF00]/5">
-          <div className="flex items-start gap-3">
-            <span className="text-2xl">💡</span>
+        <Card className="p-6 border-[#C8FF00]/20 bg-[#C8FF00]/5">
+          <div className="flex items-start gap-4">
+            <span className="text-2xl mt-0.5">💡</span>
             <div>
-              <p className="text-sm font-semibold text-[#C8FF00]">Pro Tip</p>
-              <p className="text-sm text-[#7A7A8C] mt-1">
+              <p className="text-base font-bold text-[#C8FF00]">Pro Tip</p>
+              <p className="text-sm text-[#B0B0BC] mt-1.5 leading-relaxed">
                 Consistency beats perfection. Meeting 80% of your goals every day is better than being perfect some days and skipping others.
               </p>
             </div>

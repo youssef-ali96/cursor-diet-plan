@@ -55,12 +55,12 @@ export function HabitsPage() {
 
       <PageContent>
         {/* Today's completion */}
-        <Card glow className="p-5">
-          <div className="flex items-center justify-between mb-3">
+        <Card glow className="p-6">
+          <div className="flex items-center justify-between mb-4">
             <div>
-              <p className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider">Today's Progress</p>
-              <p className="text-3xl font-black text-[#C8FF00] mt-1" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
-                {done}/{total} <span className="text-base font-normal text-[#7A7A8C]">habits done</span>
+              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-1">Today's Progress</p>
+              <p className="text-4xl font-black text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+                {done}/{total} <span className="text-lg font-normal text-[#9A9AAC]">habits done</span>
               </p>
             </div>
             <div className="text-4xl">
@@ -90,7 +90,11 @@ export function HabitsPage() {
               const isDoneToday = habit.completedDates.includes(todayStr);
 
               return (
-                <Card key={habit.id} className={cn('p-4', isDoneToday && 'border-opacity-30')} style={isDoneToday ? { borderColor: `${habit.color}30` } : {}}>
+                <Card
+                key={habit.id}
+                className="p-5"
+                style={isDoneToday ? { borderColor: `${habit.color}30` } : {}}
+              >
                   <div className="flex items-center gap-4">
                     {/* Toggle */}
                     <button
@@ -98,17 +102,17 @@ export function HabitsPage() {
                       className="shrink-0 transition-transform active:scale-90"
                     >
                       {isDoneToday ? (
-                        <CheckCircle2 size={28} style={{ color: habit.color }} />
+                        <CheckCircle2 size={30} style={{ color: habit.color }} />
                       ) : (
-                        <Circle size={28} className="text-[#2A2A30]" />
+                        <Circle size={30} className="text-[#3A3A44]" />
                       )}
                     </button>
 
                     {/* Icon & name */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-lg">{habit.icon}</span>
-                        <p className={cn('text-sm font-semibold', isDoneToday ? 'text-[#F0F0F5]' : 'text-[#7A7A8C]')}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-xl leading-none">{habit.icon}</span>
+                        <p className={cn('text-base font-semibold', isDoneToday ? 'text-[#F0F0F5]' : 'text-[#C0C0CC]')}>
                           {habit.name}
                         </p>
                         {isDoneToday && (
@@ -119,31 +123,31 @@ export function HabitsPage() {
                       </div>
 
                       {/* 7-day dots */}
-                      <div className="flex items-center gap-1.5">
-                        {last7.map((d, i) => (
+                      <div className="flex items-center gap-2">
+                        {last7.map((d) => (
                           <div
                             key={d}
                             title={format(parseISO(d), 'EEE')}
-                            className="flex flex-col items-center gap-1"
+                            className="flex flex-col items-center gap-1.5"
                           >
                             <div
-                              className="w-5 h-5 rounded-full transition-all"
+                              className="w-6 h-6 rounded-full transition-all"
                               style={{
                                 backgroundColor: habit.completedDates.includes(d)
                                   ? habit.color
-                                  : '#252529',
+                                  : '#2A2A33',
                               }}
                             />
-                            <span className="text-[8px] text-[#4A4A5A]">
+                            <span className="text-[10px] font-medium text-[#7A7A8C]">
                               {format(parseISO(d), 'E').charAt(0)}
                             </span>
                           </div>
                         ))}
-                        <div className="ml-auto pl-2">
-                          <span className="text-xs font-bold" style={{ color: habit.color }}>
+                        <div className="ml-auto pl-3 text-right">
+                          <span className="text-sm font-bold" style={{ color: habit.color }}>
                             {weekDone}/7
                           </span>
-                          <span className="text-[10px] text-[#4A4A5A] ml-1">this week</span>
+                          <p className="text-[11px] text-[#7A7A8C]">this week</p>
                         </div>
                       </div>
                     </div>
@@ -152,10 +156,10 @@ export function HabitsPage() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="shrink-0 w-8 h-8 opacity-40 hover:opacity-100"
+                      className="shrink-0 w-8 h-8 text-[#4A4A5A] hover:text-[#FF4560]"
                       onClick={() => deleteHabit(habit.id)}
                     >
-                      <Trash2 size={13} />
+                      <Trash2 size={14} />
                     </Button>
                   </div>
                 </Card>

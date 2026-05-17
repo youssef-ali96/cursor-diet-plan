@@ -45,16 +45,16 @@ export function AchievementsPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mt-5 pt-5 border-t border-[#2A2A30]">
+          <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-[#2A2A30]">
             {[
               { label: 'Workouts', value: totalWorkouts, icon: '💪' },
               { label: 'Best Streak', value: `${streak.longestStreak}d`, icon: '🔥' },
               { label: 'Badges', value: unlocked.length, icon: '🏆' },
             ].map(({ label, value, icon }) => (
               <div key={label} className="text-center">
-                <p className="text-2xl mb-1">{icon}</p>
-                <p className="text-xl font-black text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>{value}</p>
-                <p className="text-[11px] text-[#7A7A8C]">{label}</p>
+                <p className="text-3xl mb-2 leading-none">{icon}</p>
+                <p className="text-2xl font-black text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>{value}</p>
+                <p className="text-xs font-medium text-[#9A9AAC] mt-1">{label}</p>
               </div>
             ))}
           </div>
@@ -63,7 +63,7 @@ export function AchievementsPage() {
         {/* Unlocked achievements */}
         {unlocked.length > 0 && (
           <div>
-            <h2 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-3">Unlocked ({unlocked.length})</h2>
+            <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">Unlocked ({unlocked.length})</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {unlocked.map((achievement) => (
                 <AchievementCard key={achievement.id} achievement={achievement} unlocked />
@@ -75,7 +75,7 @@ export function AchievementsPage() {
         {/* Locked achievements */}
         {locked.length > 0 && (
           <div>
-            <h2 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-3">In Progress ({locked.length})</h2>
+            <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">In Progress ({locked.length})</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {locked.map((achievement) => (
                 <AchievementCard key={achievement.id} achievement={achievement} unlocked={false} />
@@ -101,34 +101,34 @@ function AchievementCard({
   const pct = Math.min(Math.round((achievement.progress / achievement.requirement) * 100), 100);
 
   return (
-    <Card className={cn('p-4 flex items-start gap-4', unlocked && 'border-[#C8FF00]/20 bg-[#C8FF00]/3')}>
+    <Card className={cn('p-5 flex items-start gap-4', unlocked && 'border-[#C8FF00]/25')}>
       <div
         className={cn(
           'w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shrink-0',
-          unlocked ? 'bg-[#C8FF00]/15 shadow-[0_0_16px_rgba(200,255,0,0.2)]' : 'bg-[#1E1E23] grayscale opacity-60'
+          unlocked ? 'bg-[#C8FF00]/15' : 'bg-[#1E1E23] grayscale opacity-50'
         )}
       >
         {achievement.icon}
       </div>
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between">
-          <p className={cn('text-sm font-bold', unlocked ? 'text-[#C8FF00]' : 'text-[#F0F0F5]')}>
+        <div className="flex items-center justify-between mb-1">
+          <p className={cn('text-sm font-bold', unlocked ? 'text-[#C8FF00]' : 'text-[#E0E0EA]')}>
             {achievement.title}
           </p>
-          {unlocked && <span className="text-[#30D158] text-xs font-bold">✓</span>}
+          {unlocked && <span className="text-[#30D158] text-xs font-bold bg-[#30D158]/10 px-2 py-0.5 rounded-full">✓</span>}
         </div>
-        <p className="text-xs text-[#7A7A8C] mt-0.5">{achievement.description}</p>
+        <p className="text-sm text-[#9A9AAC] leading-snug">{achievement.description}</p>
         {!unlocked && (
-          <div className="mt-2">
-            <div className="flex items-center justify-between text-[10px] text-[#4A4A5A] mb-1">
+          <div className="mt-3">
+            <div className="flex items-center justify-between text-xs text-[#7A7A8C] mb-1.5">
               <span>{achievement.progress} / {achievement.requirement}</span>
-              <span>{pct}%</span>
+              <span className="font-bold">{pct}%</span>
             </div>
-            <ProgressBar value={pct} color="#C8FF00" height={3} />
+            <ProgressBar value={pct} color="#C8FF00" height={4} />
           </div>
         )}
         {unlocked && achievement.unlockedAt && (
-          <p className="text-[10px] text-[#4A4A5A] mt-1">
+          <p className="text-xs text-[#7A7A8C] mt-2">
             Unlocked {format(parseISO(achievement.unlockedAt), 'MMM d, yyyy')}
           </p>
         )}
