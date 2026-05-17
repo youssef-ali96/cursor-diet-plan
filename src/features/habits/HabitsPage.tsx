@@ -83,7 +83,7 @@ export function HabitsPage() {
             <Button onClick={() => setShowAdd(true)}>Add First Habit</Button>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {habits.map((habit) => {
               const weekDone = last7.filter((d) => habit.completedDates.includes(d)).length;
               const weekPct = Math.round((weekDone / 7) * 100);
@@ -156,7 +156,7 @@ export function HabitsPage() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="shrink-0 w-8 h-8 text-[#4A4A5A] hover:text-[#FF4560]"
+                      className="shrink-0 w-8 h-8 text-[#8A8A9C] hover:text-[#FF4560]"
                       onClick={() => deleteHabit(habit.id)}
                     >
                       <Trash2 size={14} />

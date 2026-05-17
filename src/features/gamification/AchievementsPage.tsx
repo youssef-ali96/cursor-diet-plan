@@ -64,7 +64,7 @@ export function AchievementsPage() {
         {unlocked.length > 0 && (
           <div>
             <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">Unlocked ({unlocked.length})</h2>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 gap-4">
               {unlocked.map((achievement) => (
                 <AchievementCard key={achievement.id} achievement={achievement} unlocked />
               ))}
@@ -76,7 +76,7 @@ export function AchievementsPage() {
         {locked.length > 0 && (
           <div>
             <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">In Progress ({locked.length})</h2>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 gap-4">
               {locked.map((achievement) => (
                 <AchievementCard key={achievement.id} achievement={achievement} unlocked={false} />
               ))}

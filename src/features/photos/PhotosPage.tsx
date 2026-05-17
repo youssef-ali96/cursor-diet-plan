@@ -78,7 +78,7 @@ export function PhotosPage() {
           Object.entries(grouped).map(([week, photos]) => (
             <div key={week}>
               <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-3">{week}</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {photos.map((photo) => (
                   <div key={photo.id} className="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#1E1E23] border border-[#2A2A30]">
                     <img src={photo.url} alt={photo.angle} className="w-full h-full object-cover" />
@@ -110,9 +110,9 @@ export function PhotosPage() {
               onClick={() => fileRef.current?.click()}
               className="w-full aspect-video border-2 border-dashed border-[#2A2A30] rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-[#C8FF00]/50 hover:bg-[#C8FF00]/5 transition-all"
             >
-              <Upload size={32} className="text-[#4A4A5A]" />
+              <Upload size={32} className="text-[#8A8A9C]" />
               <p className="text-sm text-[#7A7A8C]">Click to upload photo</p>
-              <p className="text-xs text-[#4A4A5A]">JPG, PNG, WEBP supported</p>
+              <p className="text-xs text-[#8A8A9C]">JPG, PNG, WEBP supported</p>
             </button>
           ) : (
             <div className="relative aspect-[3/4] max-h-64 rounded-2xl overflow-hidden">
@@ -149,7 +149,7 @@ export function PhotosPage() {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             rows={2}
-            className="w-full bg-[#1E1E23] border border-[#2A2A30] rounded-xl p-3 text-sm text-[#F0F0F5] placeholder:text-[#4A4A5A] outline-none focus:border-[#C8FF00]/60 resize-none"
+            className="w-full bg-[#1E1E23] border border-[#2A2A30] rounded-xl p-3 text-sm text-[#F0F0F5] placeholder:text-[#8A8A9C] outline-none focus:border-[#C8FF00]/60 resize-none"
           />
 
           <Button onClick={handleUpload} disabled={!previewUrl} size="lg" className="w-full">
@@ -163,7 +163,7 @@ export function PhotosPage() {
         {progressPhotos.length >= 2 && (
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-4">
                 <p className="text-xs font-bold text-[#C8FF00] uppercase tracking-wider text-center">Before</p>
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#1E1E23]">
                   <img src={progressPhotos[compareIdx1]?.url} alt="before" className="w-full h-full object-cover" />
@@ -172,7 +172,7 @@ export function PhotosPage() {
                   {progressPhotos[compareIdx1] && format(parseISO(progressPhotos[compareIdx1].date), 'MMM d, yyyy')}
                 </p>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-4">
                 <p className="text-xs font-bold text-[#30D158] uppercase tracking-wider text-center">After</p>
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#1E1E23]">
                   <img src={progressPhotos[compareIdx2]?.url} alt="after" className="w-full h-full object-cover" />

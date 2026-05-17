@@ -38,7 +38,7 @@ export function InsightsPage() {
         {profile && (
           <Card className="p-6">
             <h3 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Body Overview</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
                 { label: 'Current Weight', value: formatWeight(profile.currentWeightKg), color: '#FF9F0A' },
                 { label: 'Goal Weight', value: formatWeight(profile.goalWeightKg), color: '#30D158' },
@@ -93,7 +93,7 @@ export function InsightsPage() {
           <h2 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">
             Generated Insights ({insights.length})
           </h2>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {insights.map((insight, i) => {
               const color = insightColors[insight.type as InsightType];
               return (
@@ -133,7 +133,7 @@ export function InsightsPage() {
         {/* Recommendations */}
         <Card className="p-6">
           <h3 className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Recommendations</h3>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {[
               { icon: '🥗', title: 'Track Every Meal', desc: 'Consistent meal logging is the #1 predictor of successful weight management.', color: '#30D158' },
               { icon: '💧', title: 'Hydration First', desc: 'Start your day with 500ml of water. Dehydration can be mistaken for hunger.', color: '#0A84FF' },

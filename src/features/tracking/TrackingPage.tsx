@@ -65,7 +65,7 @@ export function TrackingPage() {
         </div>
 
         {/* Summary row */}
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-4">
           {[
             { label: 'Calories', value: `${totalCalories}`, unit: 'kcal', color: '#C8FF00', percent: calPercent },
             { label: 'Steps', value: metrics.steps.toLocaleString(), unit: 'steps', color: '#0A84FF', percent: calcProgress(metrics.steps, metrics.stepsGoal) },
@@ -132,13 +132,13 @@ export function TrackingPage() {
             if (typeMeals.length === 0) return null;
             const typeTotal = typeMeals.reduce((a, m) => a + m.totalCalories, 0);
             return (
-              <div key={mealType} className="space-y-2">
+              <div key={mealType} className="space-y-4">
                 <div className="flex items-center justify-between px-1">
                   <p className="text-xs font-bold text-[#9A9AAC] uppercase tracking-widest capitalize">{mealType}</p>
                   <p className="text-xs font-bold text-[#C8FF00]">{typeTotal} kcal</p>
                 </div>
                 {typeMeals.map((m) => (
-                  <Card key={m.id} className="p-4 flex items-center gap-3">
+                  <Card key={m.id} className="p-4 flex items-center gap-4">
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-[#F0F0F5]">
                         {m.items.map((i) => i.name).join(', ')}
@@ -165,7 +165,7 @@ export function TrackingPage() {
         >
           {weight && (
             <Card className="p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-[#FF9F0A]/10 flex items-center justify-center">
                   <Scale size={16} className="text-[#FF9F0A]" />
                 </div>
@@ -193,7 +193,7 @@ export function TrackingPage() {
           onAdd={() => setQuickAdd('steps')}
           empty={false}
         >
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             <Card className="p-5">
               <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-3">Steps</p>
               <p className="text-3xl font-black text-[#0A84FF]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
@@ -261,7 +261,7 @@ function Section({
           </div>
         </div>
       ) : (
-        <div className="space-y-3">{children}</div>
+        <div className="space-y-4">{children}</div>
       )}
     </div>
   );

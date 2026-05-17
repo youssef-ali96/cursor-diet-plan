@@ -120,7 +120,7 @@ export function GoalsPage() {
           {goalItems.map((item) => {
             const pct = calcProgress(item.current, item.target);
             return (
-              <Card key={item.id} className="p-5 flex flex-col items-center text-center gap-3">
+              <Card key={item.id} className="p-5 flex flex-col items-center text-center gap-4">
                 <CircularProgress value={pct} size={76} strokeWidth={5} color={item.color}>
                   <span className="text-sm font-bold" style={{ color: item.color }}>{pct}%</span>
                 </CircularProgress>
@@ -136,7 +136,7 @@ export function GoalsPage() {
         </div>
 
         {/* Detail goal cards */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           {goalItems.map((item) => {
             const pct = calcProgress(item.current, item.target);
             return (

@@ -34,7 +34,7 @@ export function Sidebar() {
   return (
     <aside className="hidden lg:flex flex-col h-screen bg-[#0F0F11] border-r border-[#2A2A30] fixed left-0 top-0 z-40 overflow-y-auto" style={{ width: '16rem' }}>
       {/* Logo */}
-      <div className="p-5 border-b border-[#2A2A30]">
+      <div className="px-5 py-6 border-b border-[#2A2A30]">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-[#C8FF00] flex items-center justify-center">
             <span className="text-[#0F0F11] text-lg font-black" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>F</span>
@@ -48,7 +48,7 @@ export function Sidebar() {
 
       {/* Profile card */}
       {profile && (
-        <div className="p-4 border-b border-[#2A2A30]">
+        <div className="px-5 py-4 border-b border-[#2A2A30]">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C8FF00] to-[#30D158] flex items-center justify-center text-[#0F0F11] font-bold text-sm shrink-0">
               {profile.name.charAt(0).toUpperCase()}
@@ -81,10 +81,10 @@ export function Sidebar() {
             to={to}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group',
+                'flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 group',
                 isActive
                   ? 'bg-[#C8FF00]/10 text-[#C8FF00] border border-[#C8FF00]/20'
-                  : 'text-[#5A5A6A] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border border-transparent'
+                  : 'text-[#7A7A8C] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border border-transparent'
               )
             }
           >
@@ -108,10 +108,10 @@ export function Sidebar() {
           to="/settings"
           className={({ isActive }) =>
             cn(
-              'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all border',
+              'flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all border',
               isActive
                 ? 'bg-[#C8FF00]/10 text-[#C8FF00] border-[#C8FF00]/20'
-                : 'text-[#5A5A6A] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border-transparent'
+                : 'text-[#7A7A8C] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border-transparent'
             )
           }
         >

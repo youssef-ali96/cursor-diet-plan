@@ -67,7 +67,7 @@ export function WaterPage() {
               {[100, 75, 50, 25, 0].map((v) => (
                 <div key={v} className="flex items-center gap-1">
                   <div className="w-2 h-px bg-[#2A2A30]" />
-                  <span className="text-[9px] text-[#4A4A5A]">{v}%</span>
+                  <span className="text-[9px] text-[#8A8A9C]">{v}%</span>
                 </div>
               ))}
             </div>
@@ -87,7 +87,7 @@ export function WaterPage() {
           </div>
 
           {/* Manual adjust */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <Button
               variant="secondary"
               size="icon"
@@ -106,7 +106,7 @@ export function WaterPage() {
         {/* Quick add buttons */}
         <div>
           <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-4">Quick Add</p>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-4 gap-4">
             {glasses.map(({ label, icon, ml }) => (
               <button
                 key={label}
@@ -162,7 +162,7 @@ export function WaterPage() {
         {/* Tips */}
         <Card className="p-6 border-[#0A84FF]/20 bg-[#0A84FF]/5">
           <p className="text-xs font-bold text-[#0A84FF] uppercase tracking-widest mb-4">Hydration Tips</p>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {[
               '💧 Drink 500ml immediately after waking up',
               '🏋️ Add 500ml for every hour of intense exercise',

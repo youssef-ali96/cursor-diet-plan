@@ -73,7 +73,7 @@ export function SettingsPage() {
               <div>
                 <p className="text-xl font-black text-[#F0F0F5]">{profile.name}</p>
                 <p className="text-sm text-[#7A7A8C]">Level {userLevel.level} · {userLevel.title}</p>
-                <p className="text-xs text-[#4A4A5A] mt-0.5">{workouts.length} workouts · {meals.length} meals logged</p>
+                <p className="text-xs text-[#8A8A9C] mt-0.5">{workouts.length} workouts · {meals.length} meals logged</p>
               </div>
             </div>
           </Card>
@@ -131,7 +131,7 @@ export function SettingsPage() {
         {/* Stats */}
         <Card className="p-5">
           <h3 className="text-sm font-bold text-[#F0F0F5] mb-4">Your Statistics</h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             {[
               { label: 'Total Workouts', value: workouts.filter((w) => w.completed).length },
               { label: 'Meals Logged', value: meals.length },
@@ -147,7 +147,7 @@ export function SettingsPage() {
         </Card>
 
         {/* Data actions */}
-        <Card className="p-5 space-y-3">
+        <Card className="p-5 space-y-4">
           <h3 className="text-sm font-bold text-[#F0F0F5]">Data Management</h3>
           <Button variant="secondary" size="lg" className="w-full gap-2" onClick={exportData}>
             <Download size={16} /> Export All Data (JSON)

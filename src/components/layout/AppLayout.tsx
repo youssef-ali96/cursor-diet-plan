@@ -28,8 +28,8 @@ interface PageHeaderProps {
 export function PageHeader({ title, subtitle, actions }: PageHeaderProps) {
   return (
     <div
-      className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 border-b border-[#2A2A30]"
-      style={{ backgroundColor: 'rgba(15,15,17,0.85)', backdropFilter: 'blur(16px)' }}
+      className="sticky top-0 z-30 flex items-center justify-between px-6 sm:px-8 py-5 border-b border-[#2A2A30]"
+      style={{ backgroundColor: 'rgba(15,15,17,0.9)', backdropFilter: 'blur(20px)' }}
     >
       <div>
         <h1
@@ -38,7 +38,7 @@ export function PageHeader({ title, subtitle, actions }: PageHeaderProps) {
         >
           {title}
         </h1>
-        {subtitle && <p className="text-xs text-[#7A7A8C] mt-1 font-medium">{subtitle}</p>}
+        {subtitle && <p className="text-sm text-[#9A9AAC] mt-1.5 font-medium">{subtitle}</p>}
       </div>
       {actions && <div className="flex items-center gap-2 shrink-0 ml-4">{actions}</div>}
     </div>
@@ -47,7 +47,7 @@ export function PageHeader({ title, subtitle, actions }: PageHeaderProps) {
 
 export function PageContent({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`max-w-screen-xl mx-auto px-5 sm:px-8 py-8 space-y-8 ${className}`}>
+    <div className={`max-w-screen-xl mx-auto px-5 sm:px-10 py-8 sm:py-10 space-y-8 ${className}`}>
       {children}
     </div>
   );

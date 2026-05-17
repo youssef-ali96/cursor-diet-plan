@@ -87,7 +87,7 @@ export function CalendarPage() {
           {/* Day headers */}
           <div className="grid grid-cols-7 border-b border-[#2A2A30]">
             {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
-              <div key={d} className="p-3 text-center text-[10px] font-bold text-[#4A4A5A] uppercase tracking-wider">
+              <div key={d} className="p-3 text-center text-[10px] font-bold text-[#8A8A9C] uppercase tracking-wider">
                 {d}
               </div>
             ))}
@@ -172,7 +172,7 @@ export function CalendarPage() {
               color: '#FF9F0A',
             },
           ].map(({ label, value, icon, color }) => (
-            <Card key={label} className="p-4 flex items-center gap-3">
+            <Card key={label} className="p-4 flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${color}15`, color }}>
                 {icon}
               </div>
@@ -219,7 +219,7 @@ function DayDetail({ data }: { data: ReturnType<typeof useTrackingStore.getState
       {data.workouts.length > 0 && (
         <div>
           <p className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">Workouts</p>
-          <div className="space-y-2">
+          <div className="space-y-4">
             {data.workouts.map((w: any) => (
               <div key={w.id} className="flex items-center justify-between p-3 bg-[#1E1E23] rounded-xl">
                 <div>
@@ -238,7 +238,7 @@ function DayDetail({ data }: { data: ReturnType<typeof useTrackingStore.getState
           <p className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">
             Nutrition · {data.meals.reduce((a: number, m: any) => a + m.totalCalories, 0)} kcal total
           </p>
-          <div className="space-y-2">
+          <div className="space-y-4">
             {data.meals.map((m: any) => (
               <div key={m.id} className="flex items-center justify-between p-3 bg-[#1E1E23] rounded-xl">
                 <span className="text-sm text-[#F0F0F5] capitalize">{m.type}</span>
