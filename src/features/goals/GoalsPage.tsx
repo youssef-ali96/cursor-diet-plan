@@ -98,7 +98,7 @@ export function GoalsPage() {
         subtitle="Set and track your weekly fitness targets"
         actions={
           editing ? (
-            <div className="flex gap-2">
+            <div className="flex gap-5">
               <Button variant="secondary" size="sm" onClick={() => { setForm(goals); setEditing(false); }}>
                 Cancel
               </Button>
@@ -116,16 +116,16 @@ export function GoalsPage() {
 
       <PageContent>
         {/* Overview rings */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
           {goalItems.map((item) => {
             const pct = calcProgress(item.current, item.target);
             return (
-              <Card key={item.id} className="p-7 flex flex-col items-center text-center gap-4">
+              <Card key={item.id} className="p-7 flex flex-col items-center text-center gap-6">
                 <CircularProgress value={pct} size={76} strokeWidth={5} color={item.color}>
                   <span className="text-sm font-bold" style={{ color: item.color }}>{pct}%</span>
                 </CircularProgress>
                 <div>
-                  <p className="text-xs font-bold text-[#E0E0EA]">{item.label}</p>
+                  <p className="text-sm font-bold text-[#E0E0EA]">{item.label}</p>
                   <p className="text-[11px] text-[#8A8A9C] mt-0.5">
                     {typeof item.current === 'number' ? item.current.toLocaleString() : item.current} / {typeof item.target === 'number' ? item.target.toLocaleString() : item.target} {item.unit}
                   </p>
@@ -136,14 +136,14 @@ export function GoalsPage() {
         </div>
 
         {/* Detail goal cards */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           {goalItems.map((item) => {
             const pct = calcProgress(item.current, item.target);
             return (
               <Card key={item.id} className="p-7">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-6">
                   <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 text-xl"
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 text-xl"
                     style={{ backgroundColor: `${item.color}18`, color: item.color }}
                   >
                     {typeof item.icon === 'string' ? item.icon : item.icon}
@@ -153,15 +153,15 @@ export function GoalsPage() {
                     <div className="flex items-center justify-between mb-2.5">
                       <p className="text-base font-semibold text-[#E0E0EA]">{item.label}</p>
                       {pct >= 100 ? (
-                        <span className="text-xs font-bold text-[#30D158] bg-[#30D158]/10 px-2.5 py-1 rounded-full">
+                        <span className="text-sm font-bold text-[#30D158] bg-[#30D158]/10 px-2.5 py-1 rounded-full">
                           ✓ Complete
                         </span>
                       ) : (
                         <span className="text-sm font-bold" style={{ color: item.color }}>{pct}%</span>
                       )}
                     </div>
-                    <ProgressBar value={pct} color={item.color} height={7} animated />
-                    <div className="flex items-center justify-between mt-2">
+                    <ProgressBar value={pct} color={item.color} height={8} animated />
+                    <div className="flex items-center justify-between mt-6">
                       <p className="text-sm text-[#9A9AAC]">
                         {typeof item.current === 'number' ? item.current.toLocaleString() : item.current} {item.unit}
                       </p>
@@ -170,10 +170,10 @@ export function GoalsPage() {
                           type="number"
                           value={form[item.formKey] as number}
                           onChange={(e) => setForm((f) => ({ ...f, [item.formKey]: parseInt(e.target.value) || 0 }))}
-                          className="w-24 h-7 text-xs text-right bg-[#1E1E23] border border-[#C8FF00]/40 rounded-lg px-2 text-[#C8FF00] outline-none"
+                          className="w-24 h-7 text-sm text-right bg-[#1E1E23] border border-[#C8FF00]/40 rounded-lg px-2 text-[#C8FF00] outline-none"
                         />
                       ) : (
-                        <p className="text-xs font-medium text-[#9A9AAC]">
+                        <p className="text-sm font-medium text-[#9A9AAC]">
                           Goal: {typeof item.target === 'number' ? item.target.toLocaleString() : item.target} {item.unit}
                         </p>
                       )}
@@ -186,12 +186,12 @@ export function GoalsPage() {
         </div>
 
         {/* Tips */}
-        <Card className="p-6 border-[#C8FF00]/20 bg-[#C8FF00]/5">
-          <div className="flex items-start gap-4">
+        <Card className="p-8 border-[#C8FF00]/20 bg-[#C8FF00]/5">
+          <div className="flex items-start gap-6">
             <span className="text-2xl mt-0.5">💡</span>
             <div>
               <p className="text-base font-bold text-[#C8FF00]">Pro Tip</p>
-              <p className="text-sm text-[#B0B0BC] mt-1.5 leading-relaxed">
+              <p className="text-sm text-[#B0B0BC] mt-6.5 leading-relaxed">
                 Consistency beats perfection. Meeting 80% of your goals every day is better than being perfect some days and skipping others.
               </p>
             </div>

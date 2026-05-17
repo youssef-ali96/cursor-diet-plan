@@ -43,14 +43,14 @@ function PlanCard({ plan, onClick }: { plan: FitnessPlan; onClick: () => void })
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F11] via-[#0F0F11]/50 to-transparent" />
 
           {/* Featured badge */}
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#C8FF00] text-[#0F0F11] text-xs font-bold">
+          <div className="absolute top-3 left-3 flex items-center gap-1.5 px-6 py-1.5 rounded-full bg-[#C8FF00] text-[#0F0F11] text-sm font-bold">
             <Star size={12} fill="currentColor" />
             Featured Plan
           </div>
 
           {/* Content */}
-          <div className="absolute bottom-0 left-0 right-0 p-5">
-            <div className="flex items-center gap-2 mb-2">
+          <div className="absolute bottom-0 left-0 right-0 p-8">
+            <div className="flex items-center gap-5 mb-2">
               <Badge label={plan.difficulty} color="#C8FF00" />
               <Badge label={plan.goal} color="#0A84FF" />
             </div>
@@ -65,7 +65,7 @@ function PlanCard({ plan, onClick }: { plan: FitnessPlan; onClick: () => void })
         </div>
 
         {/* Footer */}
-        <div className="bg-[#17171A] p-4 flex items-center justify-between">
+        <div className="bg-[#17171A] p-7 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <div className="flex items-center gap-1.5 text-sm text-[#9A9AAC]">
               <Clock size={13} />
@@ -80,7 +80,7 @@ function PlanCard({ plan, onClick }: { plan: FitnessPlan; onClick: () => void })
               <span>{plan.days.length} days</span>
             </div>
           </div>
-          <div className="flex items-center gap-1 text-xs font-bold text-[#C8FF00]">
+          <div className="flex items-center gap-1 text-sm font-bold text-[#C8FF00]">
             View Plan <ArrowRight size={14} />
           </div>
         </div>

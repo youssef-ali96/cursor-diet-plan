@@ -49,7 +49,7 @@ export function TrackingPage() {
 
       <PageContent>
         {/* Date navigator */}
-        <div className="flex items-center justify-between bg-[#17171A] border border-[#2A2A30] rounded-2xl p-4">
+        <div className="flex items-center justify-between bg-[#17171A] border border-[#2A2A30] rounded-2xl p-7">
           <Button variant="ghost" size="icon" onClick={() => navDate(-1)}>
             <ChevronLeft size={18} />
           </Button>
@@ -65,20 +65,20 @@ export function TrackingPage() {
         </div>
 
         {/* Summary row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
             { label: 'Calories', value: `${totalCalories}`, unit: 'kcal', color: '#C8FF00', percent: calPercent },
             { label: 'Steps', value: metrics.steps.toLocaleString(), unit: 'steps', color: '#0A84FF', percent: calcProgress(metrics.steps, metrics.stepsGoal) },
             { label: 'Water', value: formatWater(metrics.waterMl), unit: '', color: '#0A84FF', percent: calcProgress(metrics.waterMl, metrics.waterGoalMl) },
             { label: 'Weight', value: weight ? `${weight.weightKg}` : '--', unit: 'kg', color: '#FF9F0A', percent: 100 },
           ].map(({ label, value, unit, color, percent }) => (
-            <Card key={label} className="p-6 text-center">
-              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">{label}</p>
+            <Card key={label} className="p-8 text-center">
+              <p className="text-sm font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">{label}</p>
               <p className="text-3xl font-black leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", color }}>
                 {value}
               </p>
-              {unit && <p className="text-sm text-[#9A9AAC] mt-1">{unit}</p>}
-              <ProgressBar value={percent} color={color} height={8} className="mt-4" />
+              {unit && <p className="text-sm text-[#9A9AAC] mt-6">{unit}</p>}
+              <ProgressBar value={percent} color={color} height={8} className="mt-6" />
             </Card>
           ))}
         </div>
@@ -92,7 +92,7 @@ export function TrackingPage() {
           emptyText="No workouts logged for this day"
         >
           {workouts.map((w) => (
-            <Card key={w.id} className="p-6 flex items-center gap-4">
+            <Card key={w.id} className="p-8 flex items-center gap-6">
               <div
                 className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 text-[#0F0F11]"
                 style={{ backgroundColor: workoutTypeColors[w.type] + '20' }}
@@ -100,16 +100,16 @@ export function TrackingPage() {
                 <Dumbbell size={16} style={{ color: workoutTypeColors[w.type] }} />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-5">
                   <p className="text-base font-semibold text-[#F0F0F5] truncate">{w.name}</p>
-                  {w.completed && <span className="text-[#30D158] text-xs">✓</span>}
+                  {w.completed && <span className="text-[#30D158] text-sm">✓</span>}
                 </div>
                 <p className="text-sm text-[#9A9AAC] mt-0.5">{w.durationMin} min · {w.caloriesBurned ?? 0} kcal burned</p>
                 {w.exercises.length > 0 && (
                   <p className="text-sm text-[#9A9AAC] mt-0.5">{w.exercises.length} exercises</p>
                 )}
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-5 shrink-0">
                 <Badge label={w.intensity} color={intensityColors[w.intensity]} variant="subtle" />
                 <Button variant="ghost" size="icon" className="w-7 h-7" onClick={() => deleteWorkout(w.id)}>
                   <Trash2 size={12} />
@@ -132,20 +132,20 @@ export function TrackingPage() {
             if (typeMeals.length === 0) return null;
             const typeTotal = typeMeals.reduce((a, m) => a + m.totalCalories, 0);
             return (
-              <div key={mealType} className="space-y-4">
+              <div key={mealType} className="space-y-6">
                 <div className="flex items-center justify-between px-1">
-                  <p className="text-xs font-bold text-[#9A9AAC] uppercase tracking-widest capitalize">{mealType}</p>
-                  <p className="text-xs font-bold text-[#C8FF00]">{typeTotal} kcal</p>
+                  <p className="text-sm font-bold text-[#9A9AAC] uppercase tracking-widest capitalize">{mealType}</p>
+                  <p className="text-sm font-bold text-[#C8FF00]">{typeTotal} kcal</p>
                 </div>
                 {typeMeals.map((m) => (
-                  <Card key={m.id} className="p-6 flex items-center gap-4">
+                  <Card key={m.id} className="p-8 flex items-center gap-6">
                     <div className="flex-1 min-w-0">
                       <p className="text-base font-semibold text-[#F0F0F5]">
                         {m.items.map((i) => i.name).join(', ')}
                       </p>
-                      <p className="text-sm text-[#9A9AAC] mt-1">{m.totalCalories} kcal · {m.items.reduce((a, i) => a + i.proteinG, 0)}g protein</p>
+                      <p className="text-sm text-[#9A9AAC] mt-6">{m.totalCalories} kcal · {m.items.reduce((a, i) => a + i.proteinG, 0)}g protein</p>
                     </div>
-                    <Button variant="ghost" size="icon" className="w-8 h-8 shrink-0" onClick={() => deleteMeal(m.id)}>
+                    <Button variant="ghost" size="icon" className="w-14 h-14 shrink-0" onClick={() => deleteMeal(m.id)}>
                       <Trash2 size={13} />
                     </Button>
                   </Card>
@@ -164,8 +164,8 @@ export function TrackingPage() {
           emptyText="No weight entry for this day"
         >
           {weight && (
-            <Card className="p-6 flex items-center justify-between">
-              <div className="flex items-center gap-4">
+            <Card className="p-8 flex items-center justify-between">
+              <div className="flex items-center gap-6">
                 <div className="w-14 h-14 rounded-2xl bg-[#FF9F0A]/10 flex items-center justify-center">
                   <Scale size={16} className="text-[#FF9F0A]" />
                 </div>
@@ -193,9 +193,9 @@ export function TrackingPage() {
           onAdd={() => setQuickAdd('steps')}
           empty={false}
         >
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             <Card className="p-7">
-              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Steps</p>
+              <p className="text-sm font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Steps</p>
               <p className="text-3xl font-black text-[#0A84FF]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                 {metrics.steps.toLocaleString()}
               </p>
@@ -203,12 +203,12 @@ export function TrackingPage() {
                 value={calcProgress(metrics.steps, metrics.stepsGoal)}
                 color="#0A84FF"
                 height={8}
-                className="mt-3"
+                className="mt-6"
               />
-              <p className="text-sm text-[#9A9AAC] mt-2">Goal: {metrics.stepsGoal.toLocaleString()}</p>
+              <p className="text-sm text-[#9A9AAC] mt-6">Goal: {metrics.stepsGoal.toLocaleString()}</p>
             </Card>
             <Card className="p-7">
-              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Water</p>
+              <p className="text-sm font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Water</p>
               <p className="text-3xl font-black text-[#30D158]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                 {formatWater(metrics.waterMl)}
               </p>
@@ -216,9 +216,9 @@ export function TrackingPage() {
                 value={calcProgress(metrics.waterMl, metrics.waterGoalMl)}
                 color="#30D158"
                 height={8}
-                className="mt-3"
+                className="mt-6"
               />
-              <p className="text-sm text-[#9A9AAC] mt-2">Goal: {formatWater(metrics.waterGoalMl)}</p>
+              <p className="text-sm text-[#9A9AAC] mt-6">Goal: {formatWater(metrics.waterGoalMl)}</p>
             </Card>
           </div>
         </Section>
@@ -238,16 +238,16 @@ function Section({
   return (
     <div>
       <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
           <div className="w-1 h-7 rounded-full bg-[#C8FF00]" />
-          <div className="w-9 h-9 rounded-xl bg-[#C8FF00]/10 flex items-center justify-center text-[#C8FF00]">
+          <div className="w-14 h-14 rounded-xl bg-[#C8FF00]/10 flex items-center justify-center text-[#C8FF00]">
             {icon}
           </div>
           <span className="text-base font-bold text-[#E0E0EA]">{title}</span>
         </div>
         <button
           onClick={onAdd}
-          className="flex items-center gap-1.5 text-sm font-bold text-[#C8FF00] px-4 py-2 rounded-xl bg-[#C8FF00]/10 hover:bg-[#C8FF00]/20 transition-colors"
+          className="flex items-center gap-1.5 text-sm font-bold text-[#C8FF00] px-7 py-5 rounded-xl bg-[#C8FF00]/10 hover:bg-[#C8FF00]/20 transition-colors"
         >
           <Plus size={14} /> Add
         </button>
@@ -256,13 +256,13 @@ function Section({
         <div className="flex items-center justify-center py-14 border-2 border-dashed border-[#2A2A30] rounded-2xl">
           <div className="text-center px-6">
             <p className="text-base text-[#9A9AAC] mb-4">{emptyText}</p>
-            <Button variant="outline" onClick={onAdd} className="gap-2">
+            <Button variant="outline" onClick={onAdd} className="gap-5">
               <Plus size={15} /> Add Entry
             </Button>
           </div>
         </div>
       ) : (
-        <div className="space-y-4">{children}</div>
+        <div className="space-y-6">{children}</div>
       )}
     </div>
   );

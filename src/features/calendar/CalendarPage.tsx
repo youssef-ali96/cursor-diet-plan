@@ -53,7 +53,7 @@ export function CalendarPage() {
           >
             {format(currentMonth, 'MMMM yyyy')}
           </h2>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-5">
             <Button variant="secondary" size="icon" onClick={() => navMonth(-1)}>
               <ChevronLeft size={18} />
             </Button>
@@ -67,7 +67,7 @@ export function CalendarPage() {
         </div>
 
         {/* Legend */}
-        <div className="flex items-center gap-4 text-sm text-[#9A9AAC]">
+        <div className="flex items-center gap-6 text-sm text-[#9A9AAC]">
           <div className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full bg-[#C8FF00]" />
             <span>Workout</span>
@@ -125,7 +125,7 @@ export function CalendarPage() {
                   </span>
 
                   {/* Indicators */}
-                  <div className="flex gap-1 mt-1.5 flex-wrap">
+                  <div className="flex gap-1 mt-6.5 flex-wrap">
                     {dw.length > 0 && (
                       <div className="flex items-center gap-0.5">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#C8FF00]" />
@@ -142,7 +142,7 @@ export function CalendarPage() {
         </Card>
 
         {/* Monthly summary */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-6">
           {[
             {
               label: 'Workouts',
@@ -172,7 +172,7 @@ export function CalendarPage() {
               color: '#FF9F0A',
             },
           ].map(({ label, value, icon, color }) => (
-            <Card key={label} className="p-6 flex items-center gap-4">
+            <Card key={label} className="p-8 flex items-center gap-6">
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${color}15`, color }}>
                 {icon}
               </div>
@@ -215,13 +215,13 @@ function DayDetail({ data }: { data: ReturnType<typeof useTrackingStore.getState
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {data.workouts.length > 0 && (
         <div>
-          <p className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">Workouts</p>
-          <div className="space-y-4">
+          <p className="text-sm font-bold text-[#B0B0BC] uppercase tracking-wider mb-2">Workouts</p>
+          <div className="space-y-6">
             {data.workouts.map((w: any) => (
-              <div key={w.id} className="flex items-center justify-between p-3 bg-[#1E1E23] rounded-xl">
+              <div key={w.id} className="flex items-center justify-between p-8 bg-[#1E1E23] rounded-xl">
                 <div>
                   <p className="text-base font-semibold text-[#F0F0F5]">{w.name}</p>
                   <p className="text-sm text-[#9A9AAC]">{w.durationMin} min · {w.caloriesBurned ?? 0} kcal</p>
@@ -235,12 +235,12 @@ function DayDetail({ data }: { data: ReturnType<typeof useTrackingStore.getState
 
       {data.meals.length > 0 && (
         <div>
-          <p className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">
+          <p className="text-sm font-bold text-[#B0B0BC] uppercase tracking-wider mb-2">
             Nutrition · {data.meals.reduce((a: number, m: any) => a + m.totalCalories, 0)} kcal total
           </p>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {data.meals.map((m: any) => (
-              <div key={m.id} className="flex items-center justify-between p-3 bg-[#1E1E23] rounded-xl">
+              <div key={m.id} className="flex items-center justify-between p-8 bg-[#1E1E23] rounded-xl">
                 <span className="text-sm text-[#F0F0F5] capitalize">{m.type}</span>
                 <span className="text-sm font-bold text-[#30D158]">{m.totalCalories} kcal</span>
               </div>
@@ -251,8 +251,8 @@ function DayDetail({ data }: { data: ReturnType<typeof useTrackingStore.getState
 
       {data.weight && (
         <div>
-          <p className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-2">Body Weight</p>
-          <div className="flex items-center justify-between p-3 bg-[#1E1E23] rounded-xl">
+          <p className="text-sm font-bold text-[#B0B0BC] uppercase tracking-wider mb-2">Body Weight</p>
+          <div className="flex items-center justify-between p-8 bg-[#1E1E23] rounded-xl">
             <span className="text-sm text-[#F0F0F5]">Weigh-in</span>
             <span className="text-xl font-black text-[#FF9F0A]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
               {data.weight.weightKg} kg

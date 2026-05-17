@@ -34,38 +34,37 @@ export function Sidebar() {
   return (
     <aside className="hidden lg:flex flex-col h-screen bg-[#0F0F11] border-r border-[#2A2A30] fixed left-0 top-0 z-40 overflow-y-auto" style={{ width: '16rem' }}>
       {/* Logo */}
-      <div className="px-5 py-6 border-b border-[#2A2A30]">
+      <div className="px-6 py-6 border-b border-[#2A2A30]">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#C8FF00] flex items-center justify-center">
-            <span className="text-[#0F0F11] text-lg font-black" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>F</span>
+          <div className="w-10 h-10 rounded-xl bg-[#C8FF00] flex items-center justify-center">
+            <span className="text-[#0F0F11] text-xl font-black" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>F</span>
           </div>
           <div>
-            <div className="text-sm font-bold text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: '0.05em' }}>FITFORGE</div>
-            <div className="text-[10px] text-[#4A4A5A] font-medium">PRO</div>
+            <div className="text-base font-bold text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: '0.05em' }}>FITFORGE</div>
+            <div className="text-xs text-[#6A6A7A] font-medium tracking-widest">PRO</div>
           </div>
         </div>
       </div>
 
       {/* Profile card */}
       {profile && (
-        <div className="px-5 py-4 border-b border-[#2A2A30]">
+        <div className="px-6 py-5 border-b border-[#2A2A30]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C8FF00] to-[#30D158] flex items-center justify-center text-[#0F0F11] font-bold text-sm shrink-0">
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#C8FF00] to-[#30D158] flex items-center justify-center text-[#0F0F11] font-bold text-sm shrink-0">
               {profile.name.charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-[#F0F0F5] truncate">{profile.name}</p>
-              <p className="text-[11px] text-[#7A7A8C]">Lvl {userLevel.level} · {userLevel.title}</p>
+              <p className="text-xs text-[#9A9AAC] mt-0.5">Lvl {userLevel.level} · {userLevel.title}</p>
             </div>
             <div className="shrink-0">
-              <CircularProgress value={xpPercent} size={36} strokeWidth={3} color="#C8FF00">
+              <CircularProgress value={xpPercent} size={38} strokeWidth={3} color="#C8FF00">
                 <span className="text-[9px] font-bold text-[#C8FF00]">{xpPercent}%</span>
               </CircularProgress>
             </div>
           </div>
-          {/* Streak */}
           {streak.currentStreak > 0 && (
-            <div className="mt-2.5 flex items-center gap-1.5 text-[11px] text-[#FF9F0A] font-semibold">
+            <div className="mt-3 flex items-center gap-2 text-xs text-[#FF9F0A] font-semibold">
               <span className="text-base leading-none">🔥</span>
               <span>{streak.currentStreak} day streak</span>
             </div>
@@ -74,23 +73,23 @@ export function Sidebar() {
       )}
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-0.5">
+      <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1">
         {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 group',
+                'flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-150 group',
                 isActive
                   ? 'bg-[#C8FF00]/10 text-[#C8FF00] border border-[#C8FF00]/20'
-                  : 'text-[#7A7A8C] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border border-transparent'
+                  : 'text-[#8A8A9C] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border border-transparent'
               )
             }
           >
             {({ isActive }) => (
               <>
-                <Icon size={16} className="shrink-0" />
+                <Icon size={17} className="shrink-0" />
                 <span className="flex-1">{label}</span>
                 {to === '/plans' && !isActive && (
                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#C8FF00] text-[#0F0F11]">NEW</span>
@@ -103,19 +102,19 @@ export function Sidebar() {
       </nav>
 
       {/* Settings */}
-      <div className="px-3 py-3 border-t border-[#1E1E23]">
+      <div className="px-4 py-4 border-t border-[#1E1E23]">
         <NavLink
           to="/settings"
           className={({ isActive }) =>
             cn(
-              'flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all border',
+              'flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all border',
               isActive
                 ? 'bg-[#C8FF00]/10 text-[#C8FF00] border-[#C8FF00]/20'
-                : 'text-[#7A7A8C] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border-transparent'
+                : 'text-[#8A8A9C] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border-transparent'
             )
           }
         >
-          <Settings size={16} className="shrink-0" />
+          <Settings size={17} className="shrink-0" />
           <span>Settings</span>
         </NavLink>
       </div>

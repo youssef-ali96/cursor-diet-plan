@@ -20,10 +20,10 @@ const WARNING = '#FF9F0A';
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[#1E1E23] border border-[#2A2A30] rounded-xl p-3 text-xs shadow-xl">
-      <p className="font-semibold text-[#7A7A8C] mb-2">{label}</p>
+    <div className="bg-[#1E1E23] border border-[#2A2A30] rounded-xl p-8 text-sm shadow-xl">
+      <p className="font-semibold text-[#B0B0BC] mb-2">{label}</p>
       {payload.map((p: any) => (
-        <div key={p.dataKey} className="flex items-center gap-2">
+        <div key={p.dataKey} className="flex items-center gap-5">
           <div className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
           <span className="text-[#F0F0F5]">{p.name}: <strong>{p.value}</strong></span>
         </div>
@@ -106,15 +106,15 @@ export function AnalyticsPage() {
 
       <PageContent>
         {/* Period selector */}
-        <div className="flex gap-2">
+        <div className="flex gap-5">
           {(['7d', '30d', '90d'] as Period[]).map((p) => (
             <button
               key={p}
               onClick={() => setPeriod(p)}
-              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+              className={`px-7 py-5 rounded-xl text-sm font-semibold transition-all ${
                 period === p
                   ? 'bg-[#C8FF00] text-[#0F0F11]'
-                  : 'bg-[#1E1E23] text-[#7A7A8C] hover:text-[#F0F0F5] border border-[#2A2A30]'
+                  : 'bg-[#1E1E23] text-[#B0B0BC] hover:text-[#F0F0F5] border border-[#2A2A30]'
               }`}
             >
               {p === '7d' ? '7 Days' : p === '30d' ? '30 Days' : '3 Months'}
@@ -123,17 +123,17 @@ export function AnalyticsPage() {
         </div>
 
         {/* Summary stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
             { label: 'Total Workouts', value: totalWorkouts, color: BRAND, unit: '' },
             { label: 'Avg Calories', value: avgCalories.toLocaleString(), color: WARNING, unit: 'kcal' },
             { label: 'Avg Steps', value: (avgSteps / 1000).toFixed(1), color: INFO, unit: 'k' },
             { label: 'Weight Change', value: weightChange ? (parseFloat(weightChange) < 0 ? `+${Math.abs(parseFloat(weightChange))}` : `-${weightChange}`) : '--', color: SUCCESS, unit: 'kg' },
           ].map(({ label, value, color, unit }) => (
-            <Card key={label} className="p-6 text-center">
-              <p className="text-[10px] font-bold text-[#7A7A8C] uppercase tracking-wider mb-1">{label}</p>
+            <Card key={label} className="p-8 text-center">
+              <p className="text-[10px] font-bold text-[#B0B0BC] uppercase tracking-wider mb-1">{label}</p>
               <p className="text-3xl font-black" style={{ fontFamily: "'Barlow Condensed', sans-serif", color }}>
-                {value}<span className="text-sm font-normal text-[#7A7A8C] ml-0.5">{unit}</span>
+                {value}<span className="text-sm font-normal text-[#B0B0BC] ml-0.5">{unit}</span>
               </p>
             </Card>
           ))}
@@ -141,7 +141,7 @@ export function AnalyticsPage() {
 
         {/* Weight chart */}
         <Card className="p-7">
-          <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Weight Progression</h3>
+          <h3 className="text-sm font-bold text-[#B0B0BC] uppercase tracking-wider mb-4">Weight Progression</h3>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={weightData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
               <defs>
@@ -161,7 +161,7 @@ export function AnalyticsPage() {
 
         {/* Calorie trend */}
         <Card className="p-7">
-          <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Calorie Trend</h3>
+          <h3 className="text-sm font-bold text-[#B0B0BC] uppercase tracking-wider mb-4">Calorie Trend</h3>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={calorieData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
               <defs>
@@ -182,7 +182,7 @@ export function AnalyticsPage() {
 
         {/* Workout frequency */}
         <Card className="p-7">
-          <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Weekly Workout Frequency</h3>
+          <h3 className="text-sm font-bold text-[#B0B0BC] uppercase tracking-wider mb-4">Weekly Workout Frequency</h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={weeklyData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#2A2A30" vertical={false} />
@@ -197,7 +197,7 @@ export function AnalyticsPage() {
 
         {/* Steps trend */}
         <Card className="p-7">
-          <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-4">Daily Steps</h3>
+          <h3 className="text-sm font-bold text-[#B0B0BC] uppercase tracking-wider mb-4">Daily Steps</h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={stepsData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#2A2A30" vertical={false} />

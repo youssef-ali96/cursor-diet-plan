@@ -66,7 +66,7 @@ export function SettingsPage() {
         {/* Profile overview */}
         {profile && (
           <Card className="p-7">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#C8FF00] to-[#30D158] flex items-center justify-center text-2xl font-black text-[#0F0F11]">
                 {profile.name.charAt(0).toUpperCase()}
               </div>
@@ -80,12 +80,12 @@ export function SettingsPage() {
         )}
 
         {/* Edit profile */}
-        <Card className="p-7 space-y-4">
+        <Card className="p-7 space-y-6">
           <h3 className="text-base font-bold text-[#F0F0F5]">Edit Profile</h3>
 
           <Input label="Name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             <Input label="Age" type="number" value={form.age} onChange={(e) => setForm((f) => ({ ...f, age: e.target.value }))} />
             <Select label="Gender" value={form.gender} onChange={(e) => setForm((f) => ({ ...f, gender: e.target.value as Gender }))}>
               <option value="male">Male</option>
@@ -94,13 +94,13 @@ export function SettingsPage() {
             </Select>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-6">
             <Input label="Height (cm)" type="number" value={form.heightCm} onChange={(e) => setForm((f) => ({ ...f, heightCm: e.target.value }))} />
             <Input label="Current Weight" type="number" step="0.1" value={form.currentWeightKg} onChange={(e) => setForm((f) => ({ ...f, currentWeightKg: e.target.value }))} />
             <Input label="Goal Weight" type="number" step="0.1" value={form.goalWeightKg} onChange={(e) => setForm((f) => ({ ...f, goalWeightKg: e.target.value }))} />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             <Select label="Activity Level" value={form.activityLevel} onChange={(e) => setForm((f) => ({ ...f, activityLevel: e.target.value as ActivityLevel }))}>
               <option value="sedentary">Sedentary</option>
               <option value="light">Light (1-3/wk)</option>
@@ -116,13 +116,13 @@ export function SettingsPage() {
           </div>
 
           {bmi && bmiCat && (
-            <div className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: `${bmiCat.color}10`, border: `1px solid ${bmiCat.color}25` }}>
+            <div className="flex items-center justify-between p-8 rounded-xl" style={{ backgroundColor: `${bmiCat.color}10`, border: `1px solid ${bmiCat.color}25` }}>
               <span className="text-sm text-[#9A9AAC]">BMI</span>
               <span className="text-sm font-bold" style={{ color: bmiCat.color }}>{bmi} · {bmiCat.label}</span>
             </div>
           )}
 
-          <Button onClick={handleSave} size="lg" className="w-full gap-2">
+          <Button onClick={handleSave} size="lg" className="w-full gap-5">
             <Save size={16} />
             {saved ? 'Saved! ✓' : 'Save Changes'}
           </Button>
@@ -131,14 +131,14 @@ export function SettingsPage() {
         {/* Stats */}
         <Card className="p-7">
           <h3 className="text-base font-bold text-[#F0F0F5] mb-4">Your Statistics</h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             {[
               { label: 'Total Workouts', value: workouts.filter((w) => w.completed).length },
               { label: 'Meals Logged', value: meals.length },
               { label: 'Weigh-ins', value: weights.length },
               { label: 'Days Active', value: [...new Set(workouts.map((w) => w.date))].length },
             ].map(({ label, value }) => (
-              <div key={label} className="bg-[#1E1E23] rounded-xl p-3 text-center">
+              <div key={label} className="bg-[#1E1E23] rounded-xl p-8 text-center">
                 <p className="text-2xl font-black text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>{value}</p>
                 <p className="text-sm text-[#9A9AAC]">{label}</p>
               </div>
@@ -147,15 +147,15 @@ export function SettingsPage() {
         </Card>
 
         {/* Data actions */}
-        <Card className="p-7 space-y-4">
+        <Card className="p-7 space-y-6">
           <h3 className="text-base font-bold text-[#F0F0F5]">Data Management</h3>
-          <Button variant="secondary" size="lg" className="w-full gap-2" onClick={exportData}>
+          <Button variant="secondary" size="lg" className="w-full gap-5" onClick={exportData}>
             <Download size={16} /> Export All Data (JSON)
           </Button>
           <Button
             variant="danger"
             size="lg"
-            className="w-full gap-2"
+            className="w-full gap-5"
             onClick={() => {
               if (confirm('Reset all data and start over? This cannot be undone.')) {
                 resetOnboarding();

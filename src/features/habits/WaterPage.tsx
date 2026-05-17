@@ -42,7 +42,7 @@ export function WaterPage() {
 
       <PageContent>
         {/* Main water display */}
-        <Card glow className="p-6 flex flex-col items-center text-center gap-4">
+        <Card glow className="p-8 flex flex-col items-center text-center gap-6">
           <div className="relative">
             {/* Bottle visualization */}
             <div className="w-32 h-48 border-2 border-[#0A84FF]/40 rounded-[32px] overflow-hidden relative bg-[#1E1E23]">
@@ -58,12 +58,12 @@ export function WaterPage() {
                   <p className="text-3xl font-black text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                     {(metrics.waterMl / 1000).toFixed(2)}
                   </p>
-                  <p className="text-xs text-white/70 font-semibold">LITERS</p>
+                  <p className="text-sm text-white/70 font-semibold">LITERS</p>
                 </div>
               </div>
             </div>
             {/* Level markers */}
-            <div className="absolute right-[-24px] top-0 h-full flex flex-col justify-between py-2">
+            <div className="absolute right-[-24px] top-0 h-full flex flex-col justify-between py-5">
               {[100, 75, 50, 25, 0].map((v) => (
                 <div key={v} className="flex items-center gap-1">
                   <div className="w-2 h-px bg-[#2A2A30]" />
@@ -78,16 +78,16 @@ export function WaterPage() {
               {metrics.waterMl}ml <span className="text-[#7A7A8C]">of</span> {metrics.waterGoalMl}ml daily goal
             </p>
             {pct >= 100 ? (
-              <p className="text-[#30D158] font-bold mt-1.5">🎉 Goal Reached!</p>
+              <p className="text-[#30D158] font-bold mt-6.5">🎉 Goal Reached!</p>
             ) : (
-              <p className="text-sm text-[#9A9AAC] mt-1.5">
+              <p className="text-sm text-[#9A9AAC] mt-6.5">
                 {metrics.waterGoalMl - metrics.waterMl}ml remaining
               </p>
             )}
           </div>
 
           {/* Manual adjust */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <Button
               variant="secondary"
               size="icon"
@@ -105,13 +105,13 @@ export function WaterPage() {
 
         {/* Quick add buttons */}
         <div>
-          <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Quick Add</p>
-          <div className="grid grid-cols-4 gap-4">
+          <p className="text-sm font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">Quick Add</p>
+          <div className="grid grid-cols-4 gap-6">
             {glasses.map(({ label, icon, ml }) => (
               <button
                 key={label}
                 onClick={() => addWater(ml)}
-                className="flex flex-col items-center gap-5 p-5 bg-[#17171A] border border-[#2A2A30] rounded-2xl hover:border-[#0A84FF]/50 hover:bg-[#0A84FF]/5 transition-all active:scale-95"
+                className="flex flex-col items-center gap-5 p-8 bg-[#17171A] border border-[#2A2A30] rounded-2xl hover:border-[#0A84FF]/50 hover:bg-[#0A84FF]/5 transition-all active:scale-95"
               >
                 <span className="text-3xl leading-none">{icon}</span>
                 <div>
@@ -124,13 +124,13 @@ export function WaterPage() {
         </div>
 
         {/* 7-day history */}
-        <Card className="p-6">
-          <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">7-Day History</p>
-          <div className="flex items-end gap-3 h-32">
+        <Card className="p-8">
+          <p className="text-sm font-bold text-[#8A8A9C] uppercase tracking-widest mb-5">7-Day History</p>
+          <div className="flex items-end gap-5 h-32">
             {last7.map(({ label, waterMl, goalMl }) => {
               const barPct = Math.min((waterMl / Math.max(goalMl, 1)) * 100, 100);
               return (
-                <div key={label} className="flex-1 flex flex-col items-center gap-2">
+                <div key={label} className="flex-1 flex flex-col items-center gap-5">
                   <div className="w-full flex-1 bg-[#1E1E23] rounded-xl overflow-hidden flex flex-col justify-end">
                     <div
                       className="w-full rounded-xl transition-all duration-700"
@@ -144,25 +144,25 @@ export function WaterPage() {
                       }}
                     />
                   </div>
-                  <span className="text-xs font-medium text-[#8A8A9C]">{label}</span>
+                  <span className="text-sm font-medium text-[#8A8A9C]">{label}</span>
                 </div>
               );
             })}
           </div>
-          <div className="flex items-center gap-5 mt-4 text-sm text-[#9A9AAC]">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-5 mt-6 text-sm text-[#9A9AAC]">
+            <div className="flex items-center gap-5">
               <div className="w-3 h-3 rounded-sm bg-[#0A84FF]" /> Partial
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-5">
               <div className="w-3 h-3 rounded-sm bg-[#30D158]" /> Goal met
             </div>
           </div>
         </Card>
 
         {/* Tips */}
-        <Card className="p-6 border-[#0A84FF]/20 bg-[#0A84FF]/5">
-          <p className="text-xs font-bold text-[#0A84FF] uppercase tracking-widest mb-4">Hydration Tips</p>
-          <div className="space-y-4">
+        <Card className="p-8 border-[#0A84FF]/20 bg-[#0A84FF]/5">
+          <p className="text-sm font-bold text-[#0A84FF] uppercase tracking-widest mb-4">Hydration Tips</p>
+          <div className="space-y-6">
             {[
               '💧 Drink 500ml immediately after waking up',
               '🏋️ Add 500ml for every hour of intense exercise',

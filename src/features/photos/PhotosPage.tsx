@@ -54,7 +54,7 @@ export function PhotosPage() {
         title="Progress Photos"
         subtitle="Visualize your transformation journey"
         actions={
-          <div className="flex gap-2">
+          <div className="flex gap-5">
             {progressPhotos.length >= 2 && (
               <Button
                 variant="secondary"
@@ -77,14 +77,14 @@ export function PhotosPage() {
         ) : (
           Object.entries(grouped).map(([week, photos]) => (
             <div key={week}>
-              <h3 className="text-xs font-bold text-[#7A7A8C] uppercase tracking-wider mb-3">{week}</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              <h3 className="text-sm font-bold text-[#B0B0BC] uppercase tracking-wider mb-3">{week}</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                 {photos.map((photo) => (
                   <div key={photo.id} className="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#1E1E23] border border-[#2A2A30]">
                     <img src={photo.url} alt={photo.angle} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-xs font-semibold text-white capitalize">{photo.angle}</p>
+                    <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-full group-hover:translate-y-0 transition-transform">
+                      <p className="text-sm font-semibold text-white capitalize">{photo.angle}</p>
                       <p className="text-[10px] text-white/70">{format(parseISO(photo.date), 'MMM d, yyyy')}</p>
                     </div>
                     <button
@@ -104,11 +104,11 @@ export function PhotosPage() {
 
       {/* Upload modal */}
       <Modal open={showUpload} onClose={() => { setShowUpload(false); setPreviewUrl(null); }} title="Add Progress Photo" size="md">
-        <div className="space-y-4">
+        <div className="space-y-6">
           {!previewUrl ? (
             <button
               onClick={() => fileRef.current?.click()}
-              className="w-full aspect-video border-2 border-dashed border-[#2A2A30] rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-[#C8FF00]/50 hover:bg-[#C8FF00]/5 transition-all"
+              className="w-full aspect-video border-2 border-dashed border-[#2A2A30] rounded-2xl flex flex-col items-center justify-center gap-5 hover:border-[#C8FF00]/50 hover:bg-[#C8FF00]/5 transition-all"
             >
               <Upload size={32} className="text-[#8A8A9C]" />
               <p className="text-sm text-[#7A7A8C]">Click to upload photo</p>
@@ -119,7 +119,7 @@ export function PhotosPage() {
               <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
               <button
                 onClick={() => setPreviewUrl(null)}
-                className="absolute top-2 right-2 w-8 h-8 bg-black/60 rounded-full flex items-center justify-center"
+                className="absolute top-2 right-2 w-14 h-14 bg-black/60 rounded-full flex items-center justify-center"
               >
                 <X size={14} className="text-white" />
               </button>
@@ -127,15 +127,15 @@ export function PhotosPage() {
           )}
           <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFile} />
 
-          <div className="space-y-1.5">
-            <p className="text-xs font-semibold text-[#7A7A8C] uppercase tracking-wider">Photo Angle</p>
-            <div className="flex gap-2">
+          <div className="space-y-6.5">
+            <p className="text-sm font-semibold text-[#B0B0BC] uppercase tracking-wider">Photo Angle</p>
+            <div className="flex gap-5">
               {(['front', 'side', 'back'] as PhotoAngle[]).map((a) => (
                 <button
                   key={a}
                   onClick={() => setAngle(a)}
-                  className={`flex-1 py-2 rounded-xl text-sm font-semibold capitalize transition-all ${
-                    angle === a ? 'bg-[#C8FF00] text-[#0F0F11]' : 'bg-[#1E1E23] text-[#7A7A8C] border border-[#2A2A30]'
+                  className={`flex-1 py-5 rounded-xl text-sm font-semibold capitalize transition-all ${
+                    angle === a ? 'bg-[#C8FF00] text-[#0F0F11]' : 'bg-[#1E1E23] text-[#B0B0BC] border border-[#2A2A30]'
                   }`}
                 >
                   {a}
@@ -149,7 +149,7 @@ export function PhotosPage() {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             rows={2}
-            className="w-full bg-[#1E1E23] border border-[#2A2A30] rounded-xl p-3 text-sm text-[#F0F0F5] placeholder:text-[#8A8A9C] outline-none focus:border-[#C8FF00]/60 resize-none"
+            className="w-full bg-[#1E1E23] border border-[#2A2A30] rounded-xl p-8 text-sm text-[#F0F0F5] placeholder:text-[#8A8A9C] outline-none focus:border-[#C8FF00]/60 resize-none"
           />
 
           <Button onClick={handleUpload} disabled={!previewUrl} size="lg" className="w-full">
@@ -161,10 +161,10 @@ export function PhotosPage() {
       {/* Compare modal */}
       <Modal open={compareMode} onClose={() => setCompareMode(false)} title="Before & After" size="lg">
         {progressPhotos.length >= 2 && (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <p className="text-xs font-bold text-[#C8FF00] uppercase tracking-wider text-center">Before</p>
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-6">
+                <p className="text-sm font-bold text-[#C8FF00] uppercase tracking-wider text-center">Before</p>
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#1E1E23]">
                   <img src={progressPhotos[compareIdx1]?.url} alt="before" className="w-full h-full object-cover" />
                 </div>
@@ -172,8 +172,8 @@ export function PhotosPage() {
                   {progressPhotos[compareIdx1] && format(parseISO(progressPhotos[compareIdx1].date), 'MMM d, yyyy')}
                 </p>
               </div>
-              <div className="space-y-4">
-                <p className="text-xs font-bold text-[#30D158] uppercase tracking-wider text-center">After</p>
+              <div className="space-y-6">
+                <p className="text-sm font-bold text-[#30D158] uppercase tracking-wider text-center">After</p>
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#1E1E23]">
                   <img src={progressPhotos[compareIdx2]?.url} alt="after" className="w-full h-full object-cover" />
                 </div>
@@ -196,10 +196,10 @@ function EmptyState({ onAdd }: { onAdd: () => void }) {
         <Camera size={32} className="text-[#C8FF00]" />
       </div>
       <h3 className="text-lg font-bold text-[#F0F0F5] mb-2">Document Your Journey</h3>
-      <p className="text-sm text-[#7A7A8C] max-w-xs mb-6">
+      <p className="text-sm text-[#B0B0BC] max-w-xs mb-6">
         Upload progress photos every few days. The before/after comparison will show how far you've come.
       </p>
-      <Button onClick={onAdd} size="lg" className="gap-2">
+      <Button onClick={onAdd} size="lg" className="gap-5">
         <Upload size={16} /> Upload First Photo
       </Button>
     </div>

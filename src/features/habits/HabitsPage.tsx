@@ -55,10 +55,10 @@ export function HabitsPage() {
 
       <PageContent>
         {/* Today's completion */}
-        <Card glow className="p-6">
+        <Card glow className="p-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <p className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-1">Today's Progress</p>
+              <p className="text-sm font-bold text-[#8A8A9C] uppercase tracking-widest mb-1">Today's Progress</p>
               <p className="text-4xl font-black text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                 {done}/{total} <span className="text-lg font-normal text-[#9A9AAC]">habits done</span>
               </p>
@@ -79,11 +79,11 @@ export function HabitsPage() {
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <span className="text-5xl mb-4">✅</span>
             <p className="text-lg font-bold text-[#F0F0F5] mb-2">No habits yet</p>
-            <p className="text-sm text-[#7A7A8C] mb-6">Start tracking daily habits to build lasting routines</p>
+            <p className="text-sm text-[#B0B0BC] mb-6">Start tracking daily habits to build lasting routines</p>
             <Button onClick={() => setShowAdd(true)}>Add First Habit</Button>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {habits.map((habit) => {
               const weekDone = last7.filter((d) => habit.completedDates.includes(d)).length;
               const weekPct = Math.round((weekDone / 7) * 100);
@@ -95,7 +95,7 @@ export function HabitsPage() {
                 className="p-7"
                 style={isDoneToday ? { borderColor: `${habit.color}30` } : {}}
               >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-6">
                     {/* Toggle */}
                     <button
                       onClick={() => toggleHabitDate(habit.id, todayStr)}
@@ -110,7 +110,7 @@ export function HabitsPage() {
 
                     {/* Icon & name */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-5 mb-3">
                         <span className="text-xl leading-none">{habit.icon}</span>
                         <p className={cn('text-base font-semibold', isDoneToday ? 'text-[#F0F0F5]' : 'text-[#C0C0CC]')}>
                           {habit.name}
@@ -123,7 +123,7 @@ export function HabitsPage() {
                       </div>
 
                       {/* 7-day dots */}
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-5">
                         {last7.map((d) => (
                           <div
                             key={d}
@@ -156,7 +156,7 @@ export function HabitsPage() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="shrink-0 w-8 h-8 text-[#8A8A9C] hover:text-[#FF4560]"
+                      className="shrink-0 w-14 h-14 text-[#8A8A9C] hover:text-[#FF4560]"
                       onClick={() => deleteHabit(habit.id)}
                     >
                       <Trash2 size={14} />
@@ -171,7 +171,7 @@ export function HabitsPage() {
 
       {/* Add habit modal */}
       <Modal open={showAdd} onClose={() => setShowAdd(false)} title="Create New Habit" size="sm">
-        <div className="space-y-4">
+        <div className="space-y-6">
           <Input
             label="Habit Name"
             placeholder="e.g. Morning Workout"
@@ -180,8 +180,8 @@ export function HabitsPage() {
           />
 
           <div>
-            <p className="text-xs font-semibold text-[#7A7A8C] uppercase tracking-wider mb-2">Icon</p>
-            <div className="grid grid-cols-6 gap-2">
+            <p className="text-sm font-semibold text-[#B0B0BC] uppercase tracking-wider mb-2">Icon</p>
+            <div className="grid grid-cols-6 gap-5">
               {ICONS.map((icon) => (
                 <button
                   key={icon}
@@ -198,13 +198,13 @@ export function HabitsPage() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold text-[#7A7A8C] uppercase tracking-wider mb-2">Color</p>
-            <div className="flex gap-2 flex-wrap">
+            <p className="text-sm font-semibold text-[#B0B0BC] uppercase tracking-wider mb-2">Color</p>
+            <div className="flex gap-5 flex-wrap">
               {COLORS.map((color) => (
                 <button
                   key={color}
                   onClick={() => setNewHabit((h) => ({ ...h, color }))}
-                  className={cn('w-8 h-8 rounded-full transition-transform', newHabit.color === color && 'ring-2 ring-white/40 scale-110')}
+                  className={cn('w-14 h-14 rounded-full transition-transform', newHabit.color === color && 'ring-2 ring-white/40 scale-110')}
                   style={{ backgroundColor: color }}
                 />
               ))}

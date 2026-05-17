@@ -51,7 +51,7 @@ export function Dashboard() {
       <PageContent>
 
         {/* ════════════════════ STAT CARDS ════════════════════ */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard accent="#FF9F0A" label="Streak">
             <div className="flex items-end gap-3 my-2">
               <span className="text-6xl font-black leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: '#FF9F0A' }}>
@@ -104,13 +104,13 @@ export function Dashboard() {
         </div>
 
         {/* ════════════════════ CALORIES + METRICS + MACROS ════════════════════ */}
-        <div className="grid lg:grid-cols-3 gap-5">
+        <div className="grid lg:grid-cols-3 gap-6">
 
           {/* Calorie ring */}
           <Card glow className="p-8 flex flex-col items-center text-center">
             <Label>Calories Today</Label>
-            <div className="my-6">
-              <CircularProgress value={calPercent} size={160} strokeWidth={13} color={calPercent > 110 ? '#FF4560' : '#C8FF00'}>
+            <div className="my-8">
+              <CircularProgress value={calPercent} size={168} strokeWidth={14} color={calPercent > 110 ? '#FF4560' : '#C8FF00'}>
                 <div className="text-center">
                   <div className="text-4xl font-black text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                     {caloriesConsumed.toLocaleString()}
@@ -120,58 +120,58 @@ export function Dashboard() {
               </CircularProgress>
             </div>
             <div className="w-full rounded-2xl bg-[#1A1A1E] border border-[#2A2A30] overflow-hidden">
-              <div className="flex justify-between items-center px-5 py-3.5 border-b border-[#2A2A30]">
-                <span className="text-sm text-[#9A9AAC]">Consumed</span>
-                <span className="text-sm font-bold text-[#C8FF00]">{caloriesConsumed.toLocaleString()} kcal</span>
+              <div className="flex justify-between items-center px-6 py-5 border-b border-[#2A2A30]">
+                <span className="text-base text-[#9A9AAC]">Consumed</span>
+                <span className="text-base font-bold text-[#C8FF00]">{caloriesConsumed.toLocaleString()} kcal</span>
               </div>
-              <div className="flex justify-between items-center px-5 py-3.5 border-b border-[#2A2A30]">
-                <span className="text-sm text-[#9A9AAC]">Burned</span>
-                <span className="text-sm font-bold text-[#FF4560]">−{caloriesBurned} kcal</span>
+              <div className="flex justify-between items-center px-6 py-5 border-b border-[#2A2A30]">
+                <span className="text-base text-[#9A9AAC]">Burned</span>
+                <span className="text-base font-bold text-[#FF4560]">−{caloriesBurned} kcal</span>
               </div>
-              <div className="flex justify-between items-center px-5 py-3.5">
-                <span className="text-sm text-[#9A9AAC]">Remaining</span>
-                <span className="text-sm font-bold text-[#F0F0F5]">{Math.max(0, calGoal - caloriesConsumed + caloriesBurned).toLocaleString()} kcal</span>
+              <div className="flex justify-between items-center px-6 py-5">
+                <span className="text-base text-[#9A9AAC]">Remaining</span>
+                <span className="text-base font-bold text-[#F0F0F5]">{Math.max(0, calGoal - caloriesConsumed + caloriesBurned).toLocaleString()} kcal</span>
               </div>
             </div>
           </Card>
 
           {/* Steps + Water */}
-          <div className="flex flex-col gap-5">
-            <Card className="p-7 flex items-center gap-5">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-[#0A84FF]/15">
-                <Footprints size={22} className="text-[#0A84FF]" />
+          <div className="flex flex-col gap-6">
+            <Card className="p-8 flex items-center gap-6">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 bg-[#0A84FF]/15">
+                <Footprints size={26} className="text-[#0A84FF]" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between mb-4">
                   <span className="text-base font-semibold text-[#D0D0DA]">Steps</span>
                   <span className="text-base font-bold text-[#0A84FF]">{formatSteps(todayMetrics.steps)} / {formatSteps(todayMetrics.stepsGoal)}</span>
                 </div>
-                <ProgressBar value={stepPercent} color="#0A84FF" height={7} />
+                <ProgressBar value={stepPercent} color="#0A84FF" height={8} />
               </div>
               <button
                 onClick={() => setQuickAdd('steps')}
-                className="w-10 h-10 rounded-xl bg-[#1E1E23] flex items-center justify-center text-[#9A9AAC] hover:text-[#F0F0F5] hover:bg-[#2A2A30] transition-colors shrink-0"
+                className="w-11 h-11 rounded-xl bg-[#1E1E23] flex items-center justify-center text-[#9A9AAC] hover:text-[#F0F0F5] hover:bg-[#2A2A30] transition-colors shrink-0"
               >
-                <Plus size={17} />
+                <Plus size={18} />
               </button>
             </Card>
 
-            <Card className="p-7 flex items-center gap-5">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-[#30D158]/15">
-                <Droplets size={22} className="text-[#30D158]" />
+            <Card className="p-8 flex items-center gap-6">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 bg-[#30D158]/15">
+                <Droplets size={26} className="text-[#30D158]" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between mb-4">
                   <span className="text-base font-semibold text-[#D0D0DA]">Water</span>
                   <span className="text-base font-bold text-[#30D158]">{formatWater(todayMetrics.waterMl)} / {formatWater(todayMetrics.waterGoalMl)}</span>
                 </div>
-                <ProgressBar value={waterPercent} color="#30D158" height={7} />
+                <ProgressBar value={waterPercent} color="#30D158" height={8} />
               </div>
               <button
                 onClick={() => setQuickAdd('water')}
-                className="w-10 h-10 rounded-xl bg-[#1E1E23] flex items-center justify-center text-[#9A9AAC] hover:text-[#F0F0F5] hover:bg-[#2A2A30] transition-colors shrink-0"
+                className="w-11 h-11 rounded-xl bg-[#1E1E23] flex items-center justify-center text-[#9A9AAC] hover:text-[#F0F0F5] hover:bg-[#2A2A30] transition-colors shrink-0"
               >
-                <Plus size={17} />
+                <Plus size={18} />
               </button>
             </Card>
           </div>
@@ -179,7 +179,7 @@ export function Dashboard() {
           {/* Macros */}
           <Card className="p-8">
             <Label>Macro Targets</Label>
-            <div className="space-y-6 mt-6">
+            <div className="flex flex-col gap-7 mt-7">
               {[
                 { label: 'Protein', target: Math.round(profile ? profile.currentWeightKg * 2 : 160), color: '#FF4560', unit: 'g' },
                 { label: 'Carbs', target: Math.round((calGoal * 0.45) / 4), color: '#C8FF00', unit: 'g' },
@@ -194,8 +194,8 @@ export function Dashboard() {
                 </div>
               ))}
             </div>
-            <Button variant="secondary" className="w-full mt-8 py-3" onClick={() => setQuickAdd('meal')}>
-              <Plus size={16} /> Log Meal
+            <Button variant="secondary" className="w-full mt-8 h-12 text-base" onClick={() => setQuickAdd('meal')}>
+              <Plus size={17} /> Log Meal
             </Button>
           </Card>
         </div>
@@ -203,7 +203,7 @@ export function Dashboard() {
         {/* ════════════════════ QUICK ADD ════════════════════ */}
         <div>
           <SectionHeader title="Quick Add" />
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 mt-6">
             {[
               { label: 'Log Workout', icon: '💪', action: () => setQuickAdd('workout') },
               { label: 'Log Meal', icon: '🥗', action: () => setQuickAdd('meal') },
@@ -213,9 +213,9 @@ export function Dashboard() {
               <button
                 key={label}
                 onClick={action}
-                className="flex items-center gap-4 p-6 rounded-2xl border border-[#2A2A30] bg-[#17171A] hover:bg-[#1E1E23] hover:border-[#C8FF00]/30 hover:-translate-y-1 active:scale-[0.98] transition-all text-left group"
+                className="flex items-center gap-5 px-7 py-6 rounded-2xl border border-[#2A2A30] bg-[#17171A] hover:bg-[#1E1E23] hover:border-[#C8FF00]/30 hover:-translate-y-1 active:scale-[0.98] transition-all text-left group"
               >
-                <span className="text-3xl leading-none">{icon}</span>
+                <span className="text-4xl leading-none">{icon}</span>
                 <span className="text-base font-semibold text-[#9A9AAC] group-hover:text-[#F0F0F5] transition-colors">{label}</span>
               </button>
             ))}
@@ -226,7 +226,7 @@ export function Dashboard() {
         {insights.length > 0 && (
           <div>
             <SectionHeader title="Today's Insights" />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
               {insights.slice(0, 3).map((insight) => (
                 <InsightCard key={insight.id} insight={insight} />
               ))}
@@ -237,24 +237,24 @@ export function Dashboard() {
         {/* ════════════════════ TODAY'S WORKOUTS ════════════════════ */}
         {todayWorkouts.length > 0 && (
           <div>
-            <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center justify-between mb-6">
               <SectionHeader title="Today's Workouts" />
               <Button variant="ghost" size="sm" className="gap-1 text-[#9A9AAC]">View All <ChevronRight size={14} /></Button>
             </div>
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4">
               {todayWorkouts.map((workout) => (
-                <Card key={workout.id} hover className="p-6 flex items-center gap-5">
-                  <div className="w-14 h-14 rounded-2xl bg-[#C8FF00]/10 flex items-center justify-center shrink-0">
-                    <Dumbbell size={22} className="text-[#C8FF00]" />
+                <Card key={workout.id} hover className="p-7 flex items-center gap-6">
+                  <div className="w-16 h-16 rounded-2xl bg-[#C8FF00]/10 flex items-center justify-center shrink-0">
+                    <Dumbbell size={26} className="text-[#C8FF00]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-base font-bold text-[#F0F0F5] truncate">{workout.name}</p>
-                    <p className="text-sm text-[#9A9AAC] mt-1.5">{workout.durationMin} min · {workout.caloriesBurned ?? 0} kcal burned</p>
+                    <p className="text-lg font-bold text-[#F0F0F5] truncate">{workout.name}</p>
+                    <p className="text-sm text-[#9A9AAC] mt-2">{workout.durationMin} min · {workout.caloriesBurned ?? 0} kcal burned</p>
                   </div>
                   <Badge label={workout.intensity} color="#C8FF00" />
                   {workout.completed && (
-                    <div className="w-8 h-8 rounded-full bg-[#30D158]/20 flex items-center justify-center shrink-0">
-                      <span className="text-[#30D158] font-bold">✓</span>
+                    <div className="w-9 h-9 rounded-full bg-[#30D158]/20 flex items-center justify-center shrink-0">
+                      <span className="text-[#30D158] font-bold text-base">✓</span>
                     </div>
                   )}
                 </Card>
@@ -291,12 +291,12 @@ function StatCard({ accent, label, children }: {
   accent: string; label: string; children: React.ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl p-7 flex flex-col border border-[#2A2A30] bg-[#17171A] hover:border-[#3A3A45] transition-colors">
+    <div className="relative overflow-hidden rounded-2xl p-8 flex flex-col gap-2 border border-[#2A2A30] bg-[#17171A] hover:border-[#3A3A45] transition-colors">
       <div
-        className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07] -translate-y-1/3 translate-x-1/3"
+        className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-[0.08] -translate-y-1/3 translate-x-1/3"
         style={{ backgroundColor: accent }}
       />
-      <span className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest">{label}</span>
+      <span className="text-xs font-bold text-[#8A8A9C] uppercase tracking-widest mb-1">{label}</span>
       {children}
     </div>
   );
@@ -306,12 +306,12 @@ function InsightCard({ insight }: { insight: { type: InsightType; title: string;
   const color = insightColors[insight.type];
   return (
     <div
-      className="flex gap-5 p-6 rounded-2xl border transition-all hover:-translate-y-1"
+      className="flex gap-6 p-7 rounded-2xl border transition-all hover:-translate-y-1"
       style={{ backgroundColor: `${color}0C`, borderColor: `${color}28` }}
     >
-      <span className="text-3xl shrink-0 mt-0.5">{insight.icon}</span>
+      <span className="text-4xl shrink-0 mt-1">{insight.icon}</span>
       <div className="min-w-0">
-        <p className="text-base font-bold leading-snug" style={{ color }}>{insight.title}</p>
+        <p className="text-lg font-bold leading-snug" style={{ color }}>{insight.title}</p>
         <p className="text-sm text-[#9A9AAC] mt-2 leading-relaxed">{insight.description}</p>
       </div>
     </div>
