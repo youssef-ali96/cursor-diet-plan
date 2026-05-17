@@ -136,7 +136,7 @@ describe('gptPlan — meals', () => {
   it('each food option has required fields', () => {
     for (const meal of gptPlan.meals) {
       for (const opt of meal.options) {
-        expect(opt.name, `food name in meal "${meal.name}"`).toBeTruthy();
+        expect(opt.name, `food name in meal "${meal.title}"`).toBeTruthy();
         expect(opt.image, `image in food "${opt.name}"`).toBeTruthy();
         expect(typeof opt.calories, `calories in food "${opt.name}"`).toBe('number');
         expect(typeof opt.protein, `protein in food "${opt.name}"`).toBe('number');

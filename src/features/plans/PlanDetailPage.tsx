@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Target, BarChart3, ChevronDown, ChevronUp, Dumbbell, Salad, BookOpen, FlaskConical, CheckCircle2, Star, Youtube } from 'lucide-react';
+import { ArrowLeft, Clock, Target, BarChart3, ChevronDown, ChevronUp, Dumbbell, Salad, BookOpen, FlaskConical, CheckCircle2, Star, PlayCircle } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -299,7 +299,7 @@ function ExerciseCard({ exercise, blockColor }: { exercise: PlanExercise; blockC
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#FF000035'; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#FF000020'; }}
           >
-            <Youtube size={11} />
+            <PlayCircle size={11} />
             Watch Tutorial
           </a>
         )}
