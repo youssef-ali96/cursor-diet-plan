@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Plus, Flame, Footprints, Droplets, Scale, Dumbbell, TrendingDown, ChevronRight, Target } from 'lucide-react';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card, CardContent, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { CircularProgress, ProgressBar } from '@/components/ui/Progress';
@@ -54,44 +54,45 @@ export function Dashboard() {
         }
       />
 
-      <div className="p-6 space-y-6">
-        {/* Hero streak + level */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <PageContent>
+        {/* Stat cards row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <StreakCard streak={streak.currentStreak} longest={streak.longestStreak} />
           <LevelCard level={userLevel.level} title={userLevel.title} xp={userLevel.xp} xpMax={userLevel.xpToNextLevel} />
           <WeightCard weight={todayWeight?.weightKg} goal={profile?.goalWeightKg} current={profile?.currentWeightKg} />
           <WorkoutCard completed={completedWorkouts} goal={Math.ceil(goals.workoutsPerWeek / 7)} workouts={todayWorkouts} />
         </div>
 
-        {/* Main calorie ring */}
+        {/* Calorie ring + metrics + macros */}
         <div className="grid lg:grid-cols-3 gap-4">
+          {/* Calorie ring */}
           <Card glow className="lg:col-span-1 p-6 flex flex-col items-center text-center">
-            <CardTitle className="mb-4">Calories Today</CardTitle>
-            <CircularProgress value={calPercent} size={140} strokeWidth={10} color={calPercent > 110 ? '#FF4560' : '#C8FF00'}>
+            <CardTitle className="mb-5 w-full text-left">Calories Today</CardTitle>
+            <CircularProgress value={calPercent} size={148} strokeWidth={11} color={calPercent > 110 ? '#FF4560' : '#C8FF00'}>
               <div className="text-center">
-                <div className="text-2xl font-black text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+                <div className="text-3xl font-black text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
                   {caloriesConsumed.toLocaleString()}
                 </div>
-                <div className="text-[10px] text-[#7A7A8C] font-medium">of {calGoal.toLocaleString()}</div>
+                <div className="text-[10px] text-[#7A7A8C] font-semibold uppercase tracking-wide">of {calGoal.toLocaleString()}</div>
               </div>
             </CircularProgress>
-            <div className="w-full mt-4 space-y-2">
+            <div className="w-full mt-5 rounded-xl bg-[#1E1E23] p-3 space-y-2.5">
               <div className="flex justify-between text-xs">
                 <span className="text-[#7A7A8C]">Consumed</span>
-                <span className="font-semibold text-[#C8FF00]">{caloriesConsumed} kcal</span>
+                <span className="font-bold text-[#C8FF00]">{caloriesConsumed.toLocaleString()} kcal</span>
               </div>
               <div className="flex justify-between text-xs">
                 <span className="text-[#7A7A8C]">Burned</span>
-                <span className="font-semibold text-[#FF4560]">-{caloriesBurned} kcal</span>
+                <span className="font-bold text-[#FF4560]">−{caloriesBurned} kcal</span>
               </div>
               <div className="flex justify-between text-xs border-t border-[#2A2A30] pt-2">
-                <span className="text-[#7A7A8C]">Net</span>
-                <span className="font-bold text-[#F0F0F5]">{caloriesConsumed - caloriesBurned} kcal</span>
+                <span className="text-[#7A7A8C]">Net remaining</span>
+                <span className="font-bold text-[#F0F0F5]">{Math.max(0, calGoal - caloriesConsumed + caloriesBurned).toLocaleString()} kcal</span>
               </div>
             </div>
           </Card>
 
-          {/* Steps + Water stacked */}
+          {/* Steps + Water */}
           <div className="space-y-4">
             <MetricCard
               icon={<Footprints size={18} />}
@@ -108,14 +109,14 @@ export function Dashboard() {
               value={formatWater(todayMetrics.waterMl)}
               goal={formatWater(todayMetrics.waterGoalMl)}
               percent={waterPercent}
-              color="#0A84FF"
+              color="#30D158"
               onAdd={() => setQuickAdd('water')}
             />
           </div>
 
-          {/* Macro breakdown */}
+          {/* Macros */}
           <Card className="p-5">
-            <CardTitle className="mb-4">Macro Targets</CardTitle>
+            <CardTitle className="mb-5">Macro Targets</CardTitle>
             <div className="space-y-4">
               {[
                 { label: 'Protein', target: Math.round(profile ? profile.currentWeightKg * 2 : 160), color: '#FF4560', unit: 'g' },
@@ -123,51 +124,47 @@ export function Dashboard() {
                 { label: 'Fat', target: Math.round((calGoal * 0.25) / 9), color: '#FF9F0A', unit: 'g' },
               ].map(({ label, target, color, unit }) => (
                 <div key={label}>
-                  <div className="flex justify-between text-xs mb-1.5">
+                  <div className="flex justify-between text-xs mb-2">
                     <span className="text-[#7A7A8C] font-medium">{label}</span>
-                    <span className="font-semibold" style={{ color }}>0 / {target}{unit}</span>
+                    <span className="font-semibold tabular-nums" style={{ color }}>0 / {target}{unit}</span>
                   </div>
-                  <ProgressBar value={0} color={color} height={5} />
+                  <ProgressBar value={0} color={color} height={6} />
                 </div>
               ))}
             </div>
-            <Button
-              variant="secondary"
-              size="sm"
-              className="w-full mt-4"
-              onClick={() => setQuickAdd('meal')}
-            >
+            <Button variant="secondary" size="sm" className="w-full mt-5" onClick={() => setQuickAdd('meal')}>
               <Plus size={14} /> Log Meal
             </Button>
           </Card>
         </div>
 
-        {/* Quick actions row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {[
-            { label: 'Log Workout', icon: '💪', action: () => setQuickAdd('workout'), color: '#C8FF00' },
-            { label: 'Log Meal', icon: '🥗', action: () => setQuickAdd('meal'), color: '#30D158' },
-            { label: 'Log Weight', icon: '⚖️', action: () => setQuickAdd('weight'), color: '#FF9F0A' },
-            { label: 'Log Steps', icon: '👟', action: () => setQuickAdd('steps'), color: '#0A84FF' },
-          ].map(({ label, icon, action, color }) => (
-            <button
-              key={label}
-              onClick={action}
-              className="flex items-center gap-3 p-4 rounded-2xl border border-[#2A2A30] bg-[#17171A] hover:border-[#3A3A45] hover:-translate-y-0.5 transition-all text-left group"
-            >
-              <span className="text-2xl">{icon}</span>
-              <span className="text-sm font-semibold text-[#7A7A8C] group-hover:text-[#F0F0F5] transition-colors">{label}</span>
-            </button>
-          ))}
+        {/* Quick actions */}
+        <div>
+          <SectionHeader title="Quick Add" />
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3">
+            {[
+              { label: 'Log Workout', icon: '💪', action: () => setQuickAdd('workout'), color: '#C8FF00' },
+              { label: 'Log Meal', icon: '🥗', action: () => setQuickAdd('meal'), color: '#30D158' },
+              { label: 'Log Weight', icon: '⚖️', action: () => setQuickAdd('weight'), color: '#FF9F0A' },
+              { label: 'Log Steps', icon: '👟', action: () => setQuickAdd('steps'), color: '#0A84FF' },
+            ].map(({ label, icon, action, color }) => (
+              <button
+                key={label}
+                onClick={action}
+                className="flex items-center gap-3 p-4 rounded-2xl border border-[#2A2A30] bg-[#17171A] hover:bg-[#1E1E23] hover:border-[#3A3A45] hover:-translate-y-0.5 active:scale-95 transition-all text-left group"
+              >
+                <span className="text-2xl leading-none">{icon}</span>
+                <span className="text-sm font-semibold text-[#7A7A8C] group-hover:text-[#F0F0F5] transition-colors leading-tight">{label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Insights */}
         {insights.length > 0 && (
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-bold text-[#F0F0F5] uppercase tracking-wider">Today's Insights</h2>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <SectionHeader title="Today's Insights" />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
               {insights.slice(0, 3).map((insight) => (
                 <InsightCard key={insight.id} insight={insight} />
               ))}
@@ -178,24 +175,24 @@ export function Dashboard() {
         {/* Today's workouts */}
         {todayWorkouts.length > 0 && (
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-bold text-[#F0F0F5] uppercase tracking-wider">Today's Workouts</h2>
-              <Button variant="ghost" size="sm" className="gap-1">View All <ChevronRight size={14} /></Button>
+            <div className="flex items-center justify-between">
+              <SectionHeader title="Today's Workouts" />
+              <Button variant="ghost" size="sm" className="gap-1 -mt-1">View All <ChevronRight size={14} /></Button>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 mt-3">
               {todayWorkouts.map((workout) => (
-                <Card key={workout.id} className="p-4 flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#C8FF00]/10 flex items-center justify-center shrink-0">
+                <Card key={workout.id} hover className="p-4 flex items-center gap-4">
+                  <div className="w-11 h-11 rounded-xl bg-[#C8FF00]/10 flex items-center justify-center shrink-0">
                     <Dumbbell size={18} className="text-[#C8FF00]" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-[#F0F0F5] truncate">{workout.name}</p>
-                    <p className="text-xs text-[#7A7A8C]">{workout.durationMin} min · {workout.caloriesBurned ?? 0} kcal</p>
+                    <p className="text-xs text-[#7A7A8C] mt-0.5">{workout.durationMin} min · {workout.caloriesBurned ?? 0} kcal burned</p>
                   </div>
                   <Badge label={workout.intensity} color="#C8FF00" />
                   {workout.completed && (
-                    <div className="w-6 h-6 rounded-full bg-[#30D158]/20 flex items-center justify-center">
-                      <span className="text-[#30D158] text-xs">✓</span>
+                    <div className="w-6 h-6 rounded-full bg-[#30D158]/20 flex items-center justify-center shrink-0">
+                      <span className="text-[#30D158] text-xs font-bold">✓</span>
                     </div>
                   )}
                 </Card>
@@ -203,7 +200,7 @@ export function Dashboard() {
             </div>
           </div>
         )}
-      </div>
+      </PageContent>
 
       <QuickAddModal
         type={quickAdd}
@@ -215,75 +212,93 @@ export function Dashboard() {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
+function SectionHeader({ title }: { title: string }) {
+  return (
+    <h2 className="text-xs font-bold text-[#4A4A5A] uppercase tracking-[0.12em]">{title}</h2>
+  );
+}
+
+function StatCard({ accent, label, children, badge }: {
+  accent: string; label: string; children: React.ReactNode; badge?: React.ReactNode;
+}) {
+  return (
+    <div
+      className="relative overflow-hidden rounded-2xl p-5 flex flex-col gap-2 border border-[#2A2A30] bg-[#17171A] hover:border-[#3A3A45] transition-colors"
+    >
+      <div className="absolute top-0 right-0 w-20 h-20 rounded-full opacity-[0.06] -translate-y-1/3 translate-x-1/3"
+        style={{ backgroundColor: accent }} />
+      <span className="text-[11px] font-bold text-[#4A4A5A] uppercase tracking-widest">{label}</span>
+      {children}
+      {badge && <div className="mt-auto">{badge}</div>}
+    </div>
+  );
+}
+
 function StreakCard({ streak, longest }: { streak: number; longest: number }) {
   return (
-    <Card className="p-5 flex flex-col gap-2" glow>
-      <CardTitle>Streak</CardTitle>
+    <StatCard accent="#FF9F0A" label="Streak">
       <div className="flex items-end gap-2">
-        <span className="text-4xl font-black text-[#FF9F0A]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+        <span className="text-5xl font-black leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: '#FF9F0A' }}>
           {streak}
         </span>
-        <span className="text-2xl mb-0.5">🔥</span>
+        <span className="text-2xl leading-none mb-1">🔥</span>
       </div>
-      <p className="text-xs text-[#7A7A8C]">Best: {longest} days</p>
-    </Card>
+      <p className="text-xs text-[#4A4A5A]">Best: {longest} days</p>
+    </StatCard>
   );
 }
 
 function LevelCard({ level, title, xp, xpMax }: { level: number; title: string; xp: number; xpMax: number }) {
   return (
-    <Card className="p-5 flex flex-col gap-2">
-      <CardTitle>Level</CardTitle>
+    <StatCard accent="#C8FF00" label="Level">
       <div className="flex items-end gap-2">
-        <span className="text-4xl font-black text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+        <span className="text-5xl font-black leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: '#C8FF00' }}>
           {level}
         </span>
         <span className="text-sm font-semibold text-[#7A7A8C] mb-1">{title}</span>
       </div>
-      <ProgressBar value={Math.round((xp / xpMax) * 100)} height={4} />
-      <p className="text-xs text-[#7A7A8C]">{xp} / {xpMax} XP</p>
-    </Card>
+      <ProgressBar value={Math.round((xp / xpMax) * 100)} height={3} />
+      <p className="text-xs text-[#4A4A5A] tabular-nums">{xp} / {xpMax} XP</p>
+    </StatCard>
   );
 }
 
 function WeightCard({ weight, goal, current }: { weight?: number; goal?: number; current?: number }) {
   const diff = current && goal ? current - goal : 0;
   return (
-    <Card className="p-5 flex flex-col gap-2">
-      <CardTitle>Weight</CardTitle>
-      <div className="flex items-end gap-2">
-        <span className="text-4xl font-black text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+    <StatCard accent="#F0F0F5" label="Weight">
+      <div className="flex items-end gap-1.5">
+        <span className="text-5xl font-black leading-none text-[#F0F0F5]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
           {weight ? weight.toFixed(1) : current?.toFixed(1) ?? '--'}
         </span>
-        <span className="text-sm text-[#7A7A8C] mb-1">kg</span>
+        <span className="text-sm text-[#4A4A5A] mb-1">kg</span>
       </div>
       {diff !== 0 && (
-        <div className="flex items-center gap-1 text-xs">
-          <TrendingDown size={12} className={diff > 0 ? 'text-[#30D158]' : 'text-[#FF4560]'} />
-          <span className={diff > 0 ? 'text-[#30D158]' : 'text-[#FF4560]'}>
-            {diff > 0 ? `-${diff.toFixed(1)}` : `+${Math.abs(diff).toFixed(1)}`} to goal
+        <div className="flex items-center gap-1 text-xs mt-1">
+          <TrendingDown size={11} style={{ color: diff > 0 ? '#30D158' : '#FF4560' }} />
+          <span style={{ color: diff > 0 ? '#30D158' : '#FF4560' }}>
+            {diff > 0 ? `−${diff.toFixed(1)}` : `+${Math.abs(diff).toFixed(1)}`} to goal
           </span>
         </div>
       )}
-    </Card>
+    </StatCard>
   );
 }
 
 function WorkoutCard({ completed, goal, workouts }: { completed: number; goal: number; workouts: { completed: boolean }[] }) {
   const done = workouts.filter((w) => w.completed).length;
   return (
-    <Card className="p-5 flex flex-col gap-2">
-      <CardTitle>Workout</CardTitle>
-      <div className="flex items-end gap-2">
-        <span className="text-4xl font-black text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+    <StatCard accent="#C8FF00" label="Workout">
+      <div className="flex items-end gap-1.5">
+        <span className="text-5xl font-black leading-none text-[#C8FF00]" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
           {done}
         </span>
-        <span className="text-sm text-[#7A7A8C] mb-1">today</span>
+        <span className="text-sm text-[#4A4A5A] mb-1">today</span>
       </div>
-      <p className="text-xs text-[#7A7A8C]">
-        {done > 0 ? '✅ Session logged' : 'No workout yet'}
+      <p className="text-xs text-[#4A4A5A] mt-1">
+        {done > 0 ? '✅ Session logged' : '— No workout yet'}
       </p>
-    </Card>
+    </StatCard>
   );
 }
 
@@ -292,21 +307,24 @@ function MetricCard({ icon, label, value, goal, percent, color, onAdd }: {
   percent: number; color: string; onAdd: () => void;
 }) {
   return (
-    <Card className="p-4 flex items-center gap-4">
-      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${color}15`, color }}>
+    <div className="flex items-center gap-4 p-4 rounded-2xl bg-[#17171A] border border-[#2A2A30] hover:border-[#3A3A45] transition-colors">
+      <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${color}18`, color }}>
         {icon}
       </div>
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="text-xs font-medium text-[#7A7A8C]">{label}</span>
-          <span className="text-xs font-semibold" style={{ color }}>{value} / {goal}</span>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-semibold text-[#7A7A8C]">{label}</span>
+          <span className="text-xs font-bold tabular-nums" style={{ color }}>{value} / {goal}</span>
         </div>
         <ProgressBar value={percent} color={color} height={5} />
       </div>
-      <Button variant="ghost" size="icon" onClick={onAdd} className="shrink-0 w-8 h-8">
-        <Plus size={14} />
-      </Button>
-    </Card>
+      <button
+        onClick={onAdd}
+        className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-[#4A4A5A] hover:text-[#F0F0F5] hover:bg-[#2A2A30] transition-colors"
+      >
+        <Plus size={15} />
+      </button>
+    </div>
   );
 }
 
@@ -314,13 +332,13 @@ function InsightCard({ insight }: { insight: { type: InsightType; title: string;
   const color = insightColors[insight.type];
   return (
     <div
-      className="flex gap-3 p-4 rounded-xl border transition-all hover:border-opacity-50"
-      style={{ backgroundColor: `${color}08`, borderColor: `${color}25` }}
+      className="flex gap-3 p-4 rounded-2xl border transition-all hover:-translate-y-0.5"
+      style={{ backgroundColor: `${color}0A`, borderColor: `${color}22` }}
     >
-      <span className="text-xl shrink-0">{insight.icon}</span>
-      <div>
-        <p className="text-sm font-semibold" style={{ color }}>{insight.title}</p>
-        <p className="text-xs text-[#7A7A8C] mt-0.5 leading-relaxed">{insight.description}</p>
+      <span className="text-xl shrink-0 mt-0.5">{insight.icon}</span>
+      <div className="min-w-0">
+        <p className="text-sm font-bold leading-tight" style={{ color }}>{insight.title}</p>
+        <p className="text-xs text-[#7A7A8C] mt-1 leading-relaxed">{insight.description}</p>
       </div>
     </div>
   );

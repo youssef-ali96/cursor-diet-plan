@@ -4,7 +4,7 @@ import {
   startOfWeek, endOfWeek, isSameMonth, isToday, parseISO, isSameDay
 } from 'date-fns';
 import { ChevronLeft, ChevronRight, Dumbbell, Utensils, Scale } from 'lucide-react';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
@@ -44,7 +44,7 @@ export function CalendarPage() {
     <AppLayout>
       <PageHeader title="Calendar" subtitle="Your fitness history at a glance" />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {/* Month nav */}
         <div className="flex items-center justify-between">
           <h2
@@ -183,7 +183,7 @@ export function CalendarPage() {
             </Card>
           ))}
         </div>
-      </div>
+      </PageContent>
 
       {/* Day detail modal */}
       {selectedDay && (

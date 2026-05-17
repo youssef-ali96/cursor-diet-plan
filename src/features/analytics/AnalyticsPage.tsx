@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
 import { format, subDays, parseISO, startOfWeek, endOfWeek, eachWeekOfInterval, subWeeks } from 'date-fns';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { useTrackingStore } from '@/store/trackingStore';
 import { useGoalsStore } from '@/store/goalsStore';
@@ -104,7 +104,7 @@ export function AnalyticsPage() {
     <AppLayout>
       <PageHeader title="Analytics" subtitle="Visualize your progress over time" />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {/* Period selector */}
         <div className="flex gap-2">
           {(['7d', '30d', '90d'] as Period[]).map((p) => (
@@ -209,7 +209,7 @@ export function AnalyticsPage() {
             </BarChart>
           </ResponsiveContainer>
         </Card>
-      </div>
+      </PageContent>
     </AppLayout>
   );
 }

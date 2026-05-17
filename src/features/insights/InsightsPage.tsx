@@ -1,4 +1,4 @@
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { useInsights } from '@/hooks/useInsights';
 import { useTrackingStore } from '@/store/trackingStore';
@@ -33,7 +33,7 @@ export function InsightsPage() {
     <AppLayout>
       <PageHeader title="Smart Insights" subtitle="AI-powered analysis of your fitness data" />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {/* Body stats card */}
         {profile && (
           <Card className="p-5">
@@ -150,7 +150,7 @@ export function InsightsPage() {
             ))}
           </div>
         </Card>
-      </div>
+      </PageContent>
     </AppLayout>
   );
 }

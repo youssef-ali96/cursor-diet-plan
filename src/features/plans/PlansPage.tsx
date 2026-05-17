@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Clock, Target, BarChart3, ArrowRight, Star } from 'lucide-react';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Badge } from '@/components/ui/Badge';
 import { gptPlan } from '@/data/gptPlan';
 import type { FitnessPlan } from '@/data/gptPlan';
@@ -17,11 +17,11 @@ export function PlansPage() {
         subtitle="Structured programs to follow week by week"
       />
 
-      <div className="p-6 space-y-4">
+      <PageContent>
         {allPlans.map((plan) => (
           <PlanCard key={plan.id} plan={plan} onClick={() => navigate(`/plans/${plan.id}`)} />
         ))}
-      </div>
+      </PageContent>
     </AppLayout>
   );
 }

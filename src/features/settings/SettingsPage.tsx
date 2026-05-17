@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input, Select } from '@/components/ui/Input';
@@ -62,7 +62,7 @@ export function SettingsPage() {
     <AppLayout>
       <PageHeader title="Settings" subtitle="Manage your profile and preferences" />
 
-      <div className="p-6 space-y-6 max-w-2xl">
+      <PageContent className="max-w-2xl">
         {/* Profile overview */}
         {profile && (
           <Card className="p-5">
@@ -165,7 +165,7 @@ export function SettingsPage() {
             <RotateCcw size={16} /> Reset & Re-Onboard
           </Button>
         </Card>
-      </div>
+      </PageContent>
     </AppLayout>
   );
 }

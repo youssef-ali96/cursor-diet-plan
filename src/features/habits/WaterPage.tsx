@@ -1,4 +1,4 @@
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { CircularProgress, ProgressBar } from '@/components/ui/Progress';
@@ -40,7 +40,7 @@ export function WaterPage() {
     <AppLayout>
       <PageHeader title="Water Tracker" subtitle="Stay hydrated, stay sharp" />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {/* Main water display */}
         <Card glow className="p-6 flex flex-col items-center text-center gap-4">
           <div className="relative">
@@ -167,7 +167,7 @@ export function WaterPage() {
             <p>⏰ Set an hourly reminder: drink one glass every hour</p>
           </div>
         </Card>
-      </div>
+      </PageContent>
     </AppLayout>
   );
 }

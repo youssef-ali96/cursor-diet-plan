@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { format, subDays, addDays } from 'date-fns';
 import { ChevronLeft, ChevronRight, Plus, Dumbbell, UtensilsCrossed, Scale, Footprints, Trash2 } from 'lucide-react';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge, intensityColors, workoutTypeColors } from '@/components/ui/Badge';
@@ -47,7 +47,7 @@ export function TrackingPage() {
         }
       />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {/* Date navigator */}
         <div className="flex items-center justify-between bg-[#17171A] border border-[#2A2A30] rounded-2xl p-4">
           <Button variant="ghost" size="icon" onClick={() => navDate(-1)}>
@@ -223,7 +223,7 @@ export function TrackingPage() {
             </Card>
           </div>
         </Section>
-      </div>
+      </PageContent>
 
       <QuickAddModal type={quickAdd} onClose={() => setQuickAdd(null)} />
     </AppLayout>

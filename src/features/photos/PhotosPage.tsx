@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { format, parseISO } from 'date-fns';
 import { Camera, Upload, ChevronLeft, ChevronRight, X, Trash2 } from 'lucide-react';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
@@ -71,7 +71,7 @@ export function PhotosPage() {
         }
       />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {progressPhotos.length === 0 ? (
           <EmptyState onAdd={() => setShowUpload(true)} />
         ) : (
@@ -100,7 +100,7 @@ export function PhotosPage() {
             </div>
           ))
         )}
-      </div>
+      </PageContent>
 
       {/* Upload modal */}
       <Modal open={showUpload} onClose={() => { setShowUpload(false); setPreviewUrl(null); }} title="Add Progress Photo" size="md">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Target, BarChart3, ChevronDown, ChevronUp, Dumbbell, Salad, BookOpen, FlaskConical, CheckCircle2, Star, PlayCircle } from 'lucide-react';
-import { AppLayout } from '@/components/layout/AppLayout';
+import { AppLayout, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -68,7 +68,7 @@ export function PlanDetailPage() {
           </div>
         </div>
 
-        <div className="p-4 sm:p-6 space-y-6">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 space-y-6">
           {/* Stats row */}
           <div className="grid grid-cols-3 gap-3">
             {[

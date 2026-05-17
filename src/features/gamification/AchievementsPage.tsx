@@ -1,4 +1,4 @@
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { ProgressBar, CircularProgress } from '@/components/ui/Progress';
 import { useGoalsStore } from '@/store/goalsStore';
@@ -22,7 +22,7 @@ export function AchievementsPage() {
         subtitle={`${unlocked.length} / ${achievements.length} unlocked`}
       />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {/* Level card */}
         <Card glow className="p-6">
           <div className="flex items-center gap-5">
@@ -83,7 +83,7 @@ export function AchievementsPage() {
             </div>
           </div>
         )}
-      </div>
+      </PageContent>
     </AppLayout>
   );
 }

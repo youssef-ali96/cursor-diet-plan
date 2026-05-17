@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { format, subDays, parseISO } from 'date-fns';
 import { Plus, Trash2, CheckCircle2, Circle } from 'lucide-react';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
@@ -53,7 +53,7 @@ export function HabitsPage() {
         }
       />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {/* Today's completion */}
         <Card glow className="p-5">
           <div className="flex items-center justify-between mb-3">
@@ -163,7 +163,7 @@ export function HabitsPage() {
             })}
           </div>
         )}
-      </div>
+      </PageContent>
 
       {/* Add habit modal */}
       <Modal open={showAdd} onClose={() => setShowAdd(false)} title="Create New Habit" size="sm">

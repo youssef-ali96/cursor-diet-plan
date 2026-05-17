@@ -74,7 +74,7 @@ export function Sidebar() {
       )}
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto p-2 space-y-0.5">
+      <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-0.5">
         {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
@@ -83,19 +83,19 @@ export function Sidebar() {
               cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group',
                 isActive
-                  ? 'bg-[#C8FF00] text-[#0F0F11]'
-                  : 'text-[#7A7A8C] hover:text-[#F0F0F5] hover:bg-[#1E1E23]'
+                  ? 'bg-[#C8FF00]/10 text-[#C8FF00] border border-[#C8FF00]/20'
+                  : 'text-[#5A5A6A] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border border-transparent'
               )
             }
           >
             {({ isActive }) => (
               <>
-                <Icon size={16} className={cn('shrink-0', !isActive && 'group-hover:text-[#F0F0F5]')} />
+                <Icon size={16} className="shrink-0" />
                 <span className="flex-1">{label}</span>
                 {to === '/plans' && !isActive && (
                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#C8FF00] text-[#0F0F11]">NEW</span>
                 )}
-                {isActive && <ChevronRight size={14} className="shrink-0 opacity-60" />}
+                {isActive && <div className="w-1.5 h-1.5 rounded-full bg-[#C8FF00] shrink-0" />}
               </>
             )}
           </NavLink>
@@ -103,13 +103,15 @@ export function Sidebar() {
       </nav>
 
       {/* Settings */}
-      <div className="p-2 border-t border-[#2A2A30]">
+      <div className="px-3 py-3 border-t border-[#1E1E23]">
         <NavLink
           to="/settings"
           className={({ isActive }) =>
             cn(
-              'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
-              isActive ? 'bg-[#C8FF00] text-[#0F0F11]' : 'text-[#7A7A8C] hover:text-[#F0F0F5] hover:bg-[#1E1E23]'
+              'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all border',
+              isActive
+                ? 'bg-[#C8FF00]/10 text-[#C8FF00] border-[#C8FF00]/20'
+                : 'text-[#5A5A6A] hover:text-[#F0F0F5] hover:bg-[#1E1E23] border-transparent'
             )
           }
         >

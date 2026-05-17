@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { format, startOfWeek, endOfWeek } from 'date-fns';
 import { Target, Edit3, Save, Dumbbell, Footprints, Flame, Droplets } from 'lucide-react';
-import { AppLayout, PageHeader } from '@/components/layout/AppLayout';
+import { AppLayout, PageHeader, PageContent } from '@/components/layout/AppLayout';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -114,7 +114,7 @@ export function GoalsPage() {
         }
       />
 
-      <div className="p-6 space-y-6">
+      <PageContent>
         {/* Overview rings */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {goalItems.map((item) => {
@@ -195,7 +195,7 @@ export function GoalsPage() {
             </div>
           </div>
         </Card>
-      </div>
+      </PageContent>
     </AppLayout>
   );
 }
