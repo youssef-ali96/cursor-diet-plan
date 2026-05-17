@@ -8,9 +8,13 @@ interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#0F0F11]">
+    <div className="min-h-screen bg-[#0F0F11] flex overflow-x-hidden">
+      {/* Fixed sidebar */}
       <Sidebar />
-      <main className="lg:pl-64 pb-20 lg:pb-0">
+      {/* Spacer that matches sidebar width on desktop, hidden on mobile */}
+      <div className="hidden lg:block shrink-0" style={{ width: '16rem' }} />
+      {/* Main content fills remaining space */}
+      <main className="flex-1 min-w-0 pb-20 lg:pb-0">
         <div className="min-h-screen">{children}</div>
       </main>
       <MobileNav />

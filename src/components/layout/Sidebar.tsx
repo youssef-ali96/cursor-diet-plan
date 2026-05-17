@@ -32,7 +32,7 @@ export function Sidebar() {
   const xpPercent = Math.round((userLevel.xp / userLevel.xpToNextLevel) * 100);
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 h-screen bg-[#0F0F11] border-r border-[#2A2A30] fixed left-0 top-0 z-40">
+    <aside className="hidden lg:flex flex-col h-screen bg-[#0F0F11] border-r border-[#2A2A30] fixed left-0 top-0 z-40 overflow-y-auto" style={{ width: '16rem' }}>
       {/* Logo */}
       <div className="p-5 border-b border-[#2A2A30]">
         <div className="flex items-center gap-3">
